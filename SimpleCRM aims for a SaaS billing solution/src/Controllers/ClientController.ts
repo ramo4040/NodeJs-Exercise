@@ -6,7 +6,7 @@ class ClientController {
     const clients = await ClientService.getAllClients();
 
     if (clients.length == 0) {
-      res.status(404).send({ message: "Resource not found" });
+      res.status(404).send({ message: "Clients not found" });
       return;
     }
 
@@ -27,11 +27,8 @@ class ClientController {
 
   async addClient(req: Request, res: Response) {
     const data = req.body;
-    const result = await ClientService.addClient(data);
-    res.send({
-      message: `Client id ${result.id} has been created`,
-      data: result,
-    });
+    const client = await ClientService.addClient(data);
+    res.send(client);
   }
 
   async deleteClient(req: Request, res: Response) {
