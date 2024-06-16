@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Entreprise {
+  id                  Int       @id @default(autoincrement())
+  nom                 String
+  siegeSocial         String
+  dateCreation        DateTime
+  identifiantFiscal   String
+  capital             Float
+  nombreEmployes      Int
+  ville               String
+  responsable         String
+  numeroTelephone     String
+  email               String
+  clients             Client[]  @relation("EntrepriseClients")
+  produits            Produit[] @relation("EntrepriseProduits")
+  fournisseurs        Fournisseur[] @relation("EntrepriseFournisseurs")
+  factures            Facture[] @relation("EntrepriseFactures")
+}
+
+model Client {
+  id                 Int       @id @default(autoincrement())
+  prenom             String
+  nom                String
+  adresse            String
+  ville              String
+  numeroTelephone    String
+  email              String
+  entrepriseId       Int
+  entreprise         Entreprise @relation("EntrepriseClients", fields: [entrepriseId], references: [id])
+  factures           Facture[] @relation("ClientFactures")
+}
+
+model Produit {
+  id                 Int        @id @default(autoincrement())
+  nom                String
+  prixAchat          Float
+  prixVente          Float
+  tauxMarge          Float
+  dimensions         String
+  taille             String
+  entrepriseId       Int
+  entreprise         Entreprise @relation("EntrepriseProduits", fields: [entrepriseId], references: [id])
+  fournisseurs       Fournisseur[] @relation("ProduitFournisseurs")
+  elementsFacture    ElementFacture[] @relation("ProduitElementsFacture")
+}
+
+model Fournisseur {
+  id                 Int       @id @default(autoincrement())
+  nom                String
+  adresse            String
+  numeroTelephone    String
+  email              String
+  entrepriseId       Int
+  entreprise         Entreprise @relation("EntrepriseFournisseurs", fields: [entrepriseId], references: [id])
+  produits           Produit[] @relation("ProduitFournisseurs")
+}
+
+model Facture {
+  id                 Int          @id @default(autoincrement())
+  date               DateTime
+  montantTotal       Float
+  clientId           Int
+  client             Client       @relation("ClientFactures", fields: [clientId], references: [id])
+  entrepriseId       Int
+  entreprise         Entreprise   @relation("EntrepriseFactures", fields: [entrepriseId], references: [id])
+  elements           ElementFacture[] @relation("FactureElements")
+}
+
+model ElementFacture {
+  id                 Int      @id @default(autoincrement())
+  quantite           Int
+  prix               Float
+  produitId          Int
+  produit            Produit  @relation("ProduitElementsFacture", fields: [produitId], references: [id])
+  factureId          Int
+  facture            Facture  @relation("FactureElements", fields: [factureId], references: [id])
+}
