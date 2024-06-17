@@ -30,14 +30,15 @@ const scheme = joi.object({
 
 const clientValidator = async (req: Request, res: Response, next) => {
   const data = req.body
-  const { error } = scheme.validate(data);
-  if (error) {
-    return res.status(400).send({ message: error.details[0].message });
-  }
   const company = await CompanyValidation.checkCompany(data)
 
   if (!company) {
     return res.status(400).send({ message: `Company id ${data.entrepriseId} does not exist` });
+  }
+  
+  const { error } = scheme.validate(data);
+  if (error) {
+    return res.status(400).send({ message: error.details[0].message });
   }
   
   next();
