@@ -33,7 +33,7 @@ SimpleCRM is a SaaS platform for online invoice management designed for business
 
 **User Stories**
 
-* As a sales manager, I want to manage the list of customers, suppliers, invoices, and orders (read, add, delete, modify).
+* As a sales manager, I want to manage the list of customers, invoices, and orders (read, add, delete, modify).
 
 **Goals**
 
