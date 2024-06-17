@@ -46,14 +46,6 @@ SimpleCRM is a SaaS platform for online invoice management designed for business
 * **Database:** MySQL
 * **ORM:** Prisma (recommended) or TypeORM
 
-**Project Structure**
-
-The project is structured in several modules:
-
-* **Data Model:** Defines the structure of the database and the relationships between different entities.
-* **API:** Provides endpoints to access data and service functionalities.
-* **User Interface (optional):** Web interface allowing users to interact with the service.
-
 ## Installation and Startup
 
 1. Clone the repository.
