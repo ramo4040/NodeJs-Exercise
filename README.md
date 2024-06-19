@@ -63,3 +63,74 @@ This project is licensed under the MIT license.
 
   </p>
 </details>
+
+<details>
+  <summary><h3>JWT auth example</h3></summary>
+
+  <p>
+
+  # JWT Authentication Example
+
+Create a Node.js application that allows users to register, log in, and authenticate using JWT. Implement APIs for registration, login, and accessing a protected route using a well-organized project structure.
+
+## Project Structure
+
+```
+└── 📁jwt auth example
+    └── 📁src
+        └── 📁Controllers
+        └── 📁Middleware
+        └── 📁Models
+        └── 📁Routes
+        └── app.ts
+        └── server.ts
+    └── nodemon.json
+    └── package-lock.json
+    └── package.json
+    └── tsconfig.json
+```
+
+## Routes
+
+### Register (/auth/register)
+
+**Method:** POST
+
+**Body:**
+
+```json
+{ 
+  "email": "your-email",
+  "password": "your-password" 
+}
+```
+
+**Description:** Registers a new user by hashing the password and storing the user details.
+
+### Login (/auth/login)
+
+**Method:** POST
+
+**Body:**
+
+```json
+{ 
+  "email": "your-email",
+  "password": "your-password" 
+}
+```
+
+**Description:** Authenticates a user by verifying the password and generates a JWT if credentials are valid.
+
+### Protected Route (/protected)
+
+**Method:** GET
+
+**Header:** Authorization: Bearer `<JWT>`
+
+**Description:** Returns protected information if the JWT is valid.
+
+    
+  </p>
+  
+</details>
