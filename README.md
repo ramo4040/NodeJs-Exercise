@@ -77,13 +77,28 @@ Create a Node.js application that allows users to register, log in, and authenti
 
 ```
 └── 📁jwt auth example
+    └── 📁prisma
+        └── schema.prisma
     └── 📁src
+        └── 📁Config
+            └── prisma.ts
         └── 📁Controllers
+            └── AuthController.ts
         └── 📁Middleware
+            └── AuthMiddleware.ts
         └── 📁Models
+            └── UserModel.ts
         └── 📁Routes
+            └── AuthRoutes.ts
+        └── 📁Services
+            └── AuthService.ts
+            └── UserService.ts
+        └── 📁Validation
+            └── AuthValidator.ts
         └── app.ts
         └── server.ts
+    └── .env
+    └── .gitignore
     └── nodemon.json
     └── package-lock.json
     └── package.json
@@ -125,8 +140,6 @@ Create a Node.js application that allows users to register, log in, and authenti
 ### Protected Route (/protected)
 
 **Method:** GET
-
-**Header:** Authorization: Bearer `<JWT>`
 
 **Description:** Returns protected information if the JWT is valid.
 
