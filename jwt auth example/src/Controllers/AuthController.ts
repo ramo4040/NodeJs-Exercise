@@ -6,7 +6,7 @@ export class AuthController {
   static async register(req: Request, res: Response) {
     const data = req.body;
     const user = await UserService.createUser(data);
-    
+
     if (!user.status && "message" in user) {
       return res.status(422).send({ message: user.message });
     }
@@ -17,6 +17,7 @@ export class AuthController {
   static async login(req: Request, res: Response) {
     const { email, password } = req.body;
     const user = await AuthService.login(email, password);
+    console.log(req.ip);
 
     if (user) {
       const token = await AuthService.generateToken(user);

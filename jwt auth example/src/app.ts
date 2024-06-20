@@ -1,6 +1,7 @@
 import express from "express";
 import { AuthRoutes } from "./Routes/AuthRoutes.js";
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
+import limiter from "./Middleware/RateLimit.js";
 class App {
   private readonly app: express.Application;
 
@@ -11,6 +12,7 @@ class App {
   }
 
   private config() {
+    this.app.use("/auth/", limiter);
     this.app.use(express.json());
     this.app.use(cookieParser());
     this.app.use(express.urlencoded({ extended: true }));
