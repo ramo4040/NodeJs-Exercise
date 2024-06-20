@@ -17,7 +17,6 @@ export class AuthController {
   static async login(req: Request, res: Response) {
     const { email, password } = req.body;
     const user = await AuthService.login(email, password);
-    console.log(req.ip);
 
     if (user) {
       const token = await AuthService.generateToken(user);
