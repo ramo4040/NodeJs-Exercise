@@ -1,10 +1,5 @@
-import { User } from "@prisma/client";
 import prisma from "../Config/prisma.js";
 
-interface IUser extends User {
-  status: any;
-  message: any;
-}
 
 export class UserModel {
   static async createUser(data) {
