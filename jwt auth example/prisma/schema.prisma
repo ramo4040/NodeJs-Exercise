@@ -18,6 +18,12 @@ model User{
   id String @id @default(uuid())
   email String 
   password String
-
+  role UserRole @default(VIEWER)
   @@unique([email])
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  VIEWER
 }
