@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { contactController } from "../Controllers/contactController";
-import { footerInfo } from "../Middleware/footerInfo";
+import { restaurantInfo } from "../Middleware/restaurantInfo";
 
 const routes = Router();
 
-routes.get("/contact", footerInfo, contactController);
+routes.get("/contact", restaurantInfo, contactController);
 
 export { routes as contactRoutes };

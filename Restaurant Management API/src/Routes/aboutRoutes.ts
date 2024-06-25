@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { aboutController } from "../Controllers/aboutController";
-import { footerInfo } from "../Middleware/footerInfo";
+import { restaurantInfo } from "../Middleware/restaurantInfo";
 
 const routes = Router();
 
-routes.get("/about", footerInfo, aboutController);
+routes.get("/about", restaurantInfo, aboutController);
 
 export { routes as aboutRoutes };

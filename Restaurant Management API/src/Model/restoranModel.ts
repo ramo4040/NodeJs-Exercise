@@ -1,6 +1,6 @@
 import prisma from "../Config/pirsma";
 
-export const getRestoranInfo = async () => {
+export const getRestaurantInfo = async () => {
   return await prisma.restoran.findFirst();
 };
 

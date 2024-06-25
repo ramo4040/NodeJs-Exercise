@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { homeController } from "../Controllers/homeController";
-import { footerInfo } from "../Middleware/footerInfo";
+import { restaurantInfo } from "../Middleware/restaurantInfo";
 const routes = Router();
 
-routes.get("/", footerInfo, homeController);
+routes.get("/", restaurantInfo, homeController);
 
 export { routes as homeRoutes };
