@@ -14,10 +14,12 @@ datasource db {
 }
 
 
-model Restoran {
-  id     String    @id     @default(uuid())
+model Restaurant {
+  id     Int    @id     @default(autoincrement())
   name   String    @unique
-  email  String    @unique
+  booking_email  String    @unique
+  general_email  String    @unique
+  technical_email  String    @unique
   adress String    
   phone  String    @unique
   image  String    
@@ -25,4 +27,24 @@ model Restoran {
   mondayClose String
   tuesdayOpen String
   tuesdayClose String
+  Employees Employees[]
+}
+
+model Employees {
+  id Int @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  email        String
+  password        String
+  image        String?
+  role         UserRole   @default(EMPLOYEE)
+  restaurantID Int
+  Restaurant Restaurant @relation(fields: [restaurantID] , references: [id])
+}
+
+enum UserRole {
+  CHEF
+  RESTAURANT_MANAGER
+  EMPLOYEE
+  ADMIN
 }

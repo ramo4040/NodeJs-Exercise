@@ -1,6 +1,12 @@
 import express from "express";
 import path from "path";
-import { homeRoutes, aboutRoutes, contactRoutes } from "./Routes/main";
+
+import {
+  homeRoutes,
+  aboutRoutes,
+  contactRoutes,
+  authRoutes,
+} from "./Routes/main";
 
 const app = express();
 
@@ -11,9 +17,12 @@ app.set("view engine", "ejs");
 // Set the views directory
 app.set("views", path.join(__dirname, "views"));
 
-//routes
+//page routes
 app.use(homeRoutes);
 app.use(aboutRoutes);
 app.use(contactRoutes);
+
+//employee routes
+app.use(authRoutes);
 
 export default app;
