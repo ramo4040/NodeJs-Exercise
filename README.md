@@ -147,3 +147,85 @@ Create a Node.js application that allows users to register, log in, and authenti
   </p>
   
 </details>
+
+
+<details>
+  <summary><h3>Restaurant Management API</h3></summary>
+
+  <p>
+
+
+# Restoran Chain Website Backend
+
+This repository contains the backend code for the Restoran chain website, designed to improve the chain's marketing strategy and provide customers with an easy way to view meals, book tables, and learn more about the restaurant.
+
+## Technologies Used
+
+The backend is built using Node.js and Express, with a MySQL database and Prisma ORM. The template engine used is Ejs, and Nodemailer is used for sending emails, along with an email marketing service.
+
+## Features
+
+The backend includes the following features:
+
+- Model and creation of the database
+- Creation of necessary endpoints (Home, About, Contact, Meals, Send Email, Add Meal)
+- Dynamic sections: meals, teams, restaurant coordinates of the Home page
+- Sending a thank-you email to new newsletter subscribers
+- Recording all necessary information about incoming requests in a text file
+
+## Business Rules
+
+The following business rules are implemented in the backend:
+
+- A meal can have only one category
+- A restaurant can employ one or more employees
+- A restaurant can serve one or more meals
+- The restaurant offers its customers the opportunity to subscribe to its newsletter
+
+## Routes 
+
+
+| Method | Path | Description | Request Body | Response | Authentication |
+|---|---|---|---|---|---|
+| GET | `/` | Retrieves information for the home page (featured meals, team members, restaurant details) | N/A | JSON object containing home page data | N/A |
+| GET | `/about` | Retrieves content for the "About Us" page | N/A | JSON object containing About content | N/A |
+| POST | `/contact` | Handles submissions from the contact form | JSON object containing name, email, and message | Success message (200 OK) or error message (400 Bad Request) | N/A |
+| GET | `/meals` | Retrieves a list of all available meals | N/A | JSON array of meal objects | N/A |
+| GET | `/meals/{mealId}` | Retrieves details for a specific meal | N/A | JSON object containing meal details or 404 Not Found | N/A |
+| POST | `/newsletter` | Handles newsletter subscription requests | JSON object containing email | Confirmation message (201 Created) or error message (400 Bad Request) | N/A |
+| POST | `/admin/meals` | (Bonus) Handles submissions for adding new meals | JSON object containing meal details | Confirmation message (201 Created), error message (400 Bad Request), or 401 Unauthorized | Admin authentication required |
+| POST | `/admin/employees` | (Bonus) Handles submissions for adding new employees | JSON object containing employee details | Confirmation message (201 Created), error message (400 Bad Request), or 401 Unauthorized | Admin authentication required |
+
+
+## Bonus Features
+
+The following bonus features are also included:
+
+- CSRF protection
+- Table reservation
+- Form to add meals
+- Form to add employees
+- Customization of the site to adapt it to each restaurant
+
+## Installation
+
+To install the backend, follow these steps:
+
+1. Clone the repository
+2. Install the dependencies using `npm install`
+3. Set up the MySQL database and update the `.env` file with the database credentials
+4. Run the Prisma migrations using `npx prisma migrate dev`
+5. Start the server using `npm start`
+
+## Contributing
+
+Contributions are welcome! Please submit a pull request with any proposed changes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+
+    
+  </p>
+</details>
