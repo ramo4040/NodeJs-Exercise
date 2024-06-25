@@ -9,6 +9,20 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+
+model Restoran {
+  id     String    @id     @default(uuid())
+  name   String    @unique
+  email  String    @unique
+  adress String    
+  phone  String    @unique
+  image  String    
+  mondayOpen  String 
+  mondayClose String
+  tuesdayOpen String
+  tuesdayClose String
 }
