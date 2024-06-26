@@ -24,6 +24,7 @@ const adminLogin = async (req: Request, res: Response) => {
       .send({ message: "Login successful!" });
     return;
   }
+  
   res.status(403).send({ message: "Invalid email or password" });
 };
 
