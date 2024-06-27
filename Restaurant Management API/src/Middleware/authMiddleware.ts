@@ -7,7 +7,7 @@ export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+) => {  
   const token = req.cookies.jwt;
   if (token) {
     const decode = jwt.verify(token, process.env.JWT_SECRET);
