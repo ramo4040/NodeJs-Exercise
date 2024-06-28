@@ -9,7 +9,8 @@ const create = async (req: Request, res: Response) => {
   const existemail = await newsLetterModel.getEmail(email);
 
   if (existemail) {
-    return res.status(400).send({ error: "Email already exists" });
+    res.status(400).send({ error: "Email already exists" });
+    return res.redirect("/");
   }
 
   await newsLetterModel.addEmail(email);
