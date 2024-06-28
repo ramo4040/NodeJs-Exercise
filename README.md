@@ -228,3 +228,85 @@ This project is licensed under the [MIT License](LICENSE).
     
   </p>
 </details>
+
+
+<details>
+  <summary><h3>MongoDB Native driver : REST API CRUD Operations for Users with Node.js, Express</h3></summary>
+
+  <p>
+
+This repository contains a basic example of a REST API built with Node.js, Express, and MongoDB's native driver to perform CRUD operations on a `users` collection.
+
+## Getting Started
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/users-api.git
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Create a `.env` file:**
+   ```
+   MONGO_URI=mongodb://localhost:27017/your-database-name
+   PORT=8080
+   ```
+   Replace `mongodb://localhost:27017/your-database-name` with your MongoDB connection string and `3000` with your desired port.
+4. **Run the server:**
+   ```bash
+   npm start
+   ```
+   The server will start running at `http://localhost:3000`.
+
+## API Endpoints
+
+The API provides the following endpoints for user management:
+
+| Endpoint           | Method | Description                                                                     |
+|--------------------|--------|------------------------------------------------------------------------------|
+| `/users`            | POST   | Create a new user                                                             |
+| `/users`            | GET    | Retrieve all users                                                           |
+| `/users/:id`       | GET    | Retrieve a user by ID                                                         |
+| `/users/:id`       | PUT    | Update a user by ID                                                          |
+| `/users/:id`       | DELETE | Delete a user by ID                                                          |
+
+## User Model
+
+The user model is defined in `models/User.js` and includes the following fields:
+
+- `username` (string, unique)
+- `email` (string, unique)
+- `password` (string, hashed)
+- `role` (string, optional)
+- `createdAt` (date)
+- `updatedAt` (date)
+
+## Data Validation
+
+Input data for each endpoint is validated against the user model schema to ensure consistency and data integrity.
+
+## Error Handling
+
+The API includes basic error handling mechanisms to catch and handle potential errors during database operations. Appropriate error messages are returned to the client in case of failures.
+
+## Testing
+
+The API can be tested using a tool like Postman or similar. You can send requests to the specified endpoints with valid or invalid data to verify the correct functionality of each CRUD operation.
+
+## Further Improvements
+
+- Implement authentication and authorization to secure the API.
+- Add features like password reset or account verification.
+- Implement pagination for handling large numbers of users.
+- Implement more robust error handling and logging.
+
+## Contributing
+
+Contributions are welcome! Please feel free to open issues or submit pull requests.
+
+This project provides a basic foundation for building a user management API. You can extend it by adding more functionalities and features as required.
+
+    
+  </p>
+</details>
