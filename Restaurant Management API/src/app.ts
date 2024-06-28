@@ -9,6 +9,7 @@ import {
   contactRoutes,
   authRoutes,
   mealsRoutes,
+  newsletterRoutes,
 } from "./Routes/main";
 import { employeeRoutes } from "./Routes/employeeRoutes";
 
@@ -33,5 +34,7 @@ app.use(authRoutes);
 
 app.use(employeeRoutes);
 app.use(mealsRoutes);
+
+app.use(newsletterRoutes);
 
 export default app;

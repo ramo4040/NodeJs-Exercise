@@ -68,3 +68,9 @@ model Meals {
   Category Category @relation(fields: [categoryID] , references: [ID])
   Restaurant Restaurant @relation(fields: [restaurantID] , references: [id])
 }
+
+model NewsLetter {
+  id Int @id @default(autoincrement())
+  email String
+  date_creation DateTime @default(now())
+}

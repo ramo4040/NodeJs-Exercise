@@ -6,4 +6,6 @@ import { authRoutes } from "./AuthRoutes";
 
 import { mealsRoutes } from "./mealsRoutes";
 
-export { homeRoutes, aboutRoutes, contactRoutes, authRoutes, mealsRoutes };
+import { newsletterRoutes } from './newsletterRoutes';
+
+export { homeRoutes, aboutRoutes, contactRoutes, authRoutes, mealsRoutes,newsletterRoutes };
