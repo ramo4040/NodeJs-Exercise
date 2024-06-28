@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
+import { getAllEmployees } from "../Model/employeeModel";
 
-export const aboutController = (req: Request, res: Response) => {
-  res.render("about");
+export const aboutController = async (req: Request, res: Response) => {
+  const employees = await getAllEmployees();
+  res.render("about", { employees });
 };
