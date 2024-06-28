@@ -1,5 +1,11 @@
 import prisma from "../Config/pirsma";
 
+const getAllEmployees = async () => {
+  return await prisma.employees.findMany({
+    where:{role:"CHEF"}
+  });
+};
+
 const getEmployeesByEmail = async (email) => {
   const employee = await prisma.employees.findFirst({
     where: { email: email },
@@ -20,4 +26,4 @@ const createEmployee = async (data) => {
   });
 };
 
-export { getEmployeesByEmail, createEmployee };
+export { getEmployeesByEmail, createEmployee, getAllEmployees };
