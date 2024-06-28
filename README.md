@@ -189,6 +189,7 @@ The following business rules are implemented in the backend:
 |---|---|---|---|---|---|
 | GET | `/` | Retrieves information for the home page (featured meals, team members, restaurant details) | N/A | JSON object containing home page data | N/A |
 | GET | `/about` | Retrieves content for the "About Us" page | N/A | JSON object containing About content | N/A |
+| GET | `/contact` | Retrieves content for the "contact Us" page | N/A | JSON object containing Contact content | N/A |
 | POST | `/contact` | Handles submissions from the contact form | JSON object containing name, email, and message | Success message (200 OK) or error message (400 Bad Request) | N/A |
 | GET | `/meals` | Retrieves a list of all available meals | N/A | JSON array of meal objects | N/A |
 | GET | `/meals/{mealId}` | Retrieves details for a specific meal | N/A | JSON object containing meal details or 404 Not Found | N/A |
