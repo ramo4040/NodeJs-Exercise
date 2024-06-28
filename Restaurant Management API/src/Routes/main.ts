@@ -2,6 +2,8 @@ import { homeRoutes } from "./homeRoutes";
 import { aboutRoutes } from "./aboutRoutes";
 import { contactRoutes } from "./contactRoutes";
 
-import { authRoutes } from './AuthRoutes';
+import { authRoutes } from "./AuthRoutes";
 
-export { homeRoutes, aboutRoutes, contactRoutes , authRoutes };
+import { mealsRoutes } from "./mealsRoutes";
+
+export { homeRoutes, aboutRoutes, contactRoutes, authRoutes, mealsRoutes };

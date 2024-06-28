@@ -28,6 +28,7 @@ model Restaurant {
   tuesdayOpen String
   tuesdayClose String
   Employees Employees[]
+  Meals Meals[]
 }
 
 model Employees {
@@ -47,4 +48,23 @@ enum UserRole {
   RESTAURANT_MANAGER
   EMPLOYEE
   ADMIN
+}
+
+model Category {
+  ID Int     @id @default(autoincrement())
+  Name       String  @unique
+  Image      String? @unique
+  Meals Meals[]
+}
+
+model Meals {
+  ID Int @id @default(autoincrement())
+  name String @unique
+  description String?
+  price Int
+  image String? @unique
+  restaurantID Int
+  categoryID Int
+  Category Category @relation(fields: [categoryID] , references: [ID])
+  Restaurant Restaurant @relation(fields: [restaurantID] , references: [id])
 }

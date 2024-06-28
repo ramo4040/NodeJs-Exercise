@@ -8,6 +8,7 @@ import {
   aboutRoutes,
   contactRoutes,
   authRoutes,
+  mealsRoutes,
 } from "./Routes/main";
 import { employeeRoutes } from "./Routes/employeeRoutes";
 
@@ -31,5 +32,6 @@ app.use(contactRoutes);
 app.use(authRoutes);
 
 app.use(employeeRoutes);
+app.use(mealsRoutes);
 
 export default app;
