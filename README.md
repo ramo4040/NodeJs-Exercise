@@ -191,8 +191,6 @@ The following business rules are implemented in the backend:
 | GET | `/about` | Retrieves content for the "About Us" page | N/A | JSON object containing About content | N/A |
 | GET | `/contact` | Retrieves content for the "contact Us" page | N/A | JSON object containing Contact content | N/A |
 | POST | `/contact` | Handles submissions from the contact form | JSON object containing name, email, and message | Success message (200 OK) or error message (400 Bad Request) | N/A |
-| GET | `/meals` | Retrieves a list of all available meals | N/A | JSON array of meal objects | N/A |
-| GET | `/meals/{mealId}` | Retrieves details for a specific meal | N/A | JSON object containing meal details or 404 Not Found | N/A |
 | POST | `/newsletter` | Handles newsletter subscription requests | JSON object containing email | Confirmation message (201 Created) or error message (400 Bad Request) | N/A |
 | POST | `/admin/meals` | (Bonus) Handles submissions for adding new meals | JSON object containing meal details | Confirmation message (201 Created), error message (400 Bad Request), or 401 Unauthorized | Admin authentication required |
 | POST | `/admin/employees` | (Bonus) Handles submissions for adding new employees | JSON object containing employee details | Confirmation message (201 Created), error message (400 Bad Request), or 401 Unauthorized | Admin authentication required |
