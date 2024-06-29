@@ -31,13 +31,13 @@ export class UserRepository implements IUserRepository {
     );
   }
 
-  async getUserById(id: ObjectId): Promise<UserModel> {
+  async getUserById<T>(id: ObjectId): Promise<T> {
     const user = await this.collection.findOne({ _id: id });
-    return user as UserModel;
+    return user as T;
   }
 
-  async deleteUser(id: ObjectId): Promise<UserModel | null> {
+  async deleteUser<T>(id: ObjectId): Promise<T> {
     const result = await this.collection.findOneAndDelete({ _id: id });
-    return result as UserModel | null;
+    return result as T;
   }
 }

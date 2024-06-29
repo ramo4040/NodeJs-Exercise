@@ -2,7 +2,7 @@ import { Router } from "express";
 import { inject, injectable } from "inversify";
 import TYPES from "../Config/types.js";
 import { IUserController } from "../Interfaces/IUserController.js";
-import { UserValidator } from '../Validation/UserValidator.js';
+import { UserValidator } from "../Validation/UserValidator.js";
 
 @injectable()
 export class UserRoutes {
@@ -15,10 +15,18 @@ export class UserRoutes {
   }
 
   public registerRoutes(): Router {
-    this.routes.post("/users", UserValidator.validate, this.UserController.createUser);
-    this.routes.get("/users",this.UserController.getAllUser);
-    this.routes.get("/users/:id",this.UserController.getUserById);
-    this.routes.delete("/users/:id",this.UserController.deleteUser);
+    this.routes.post(
+      "/users",
+      UserValidator.validate,
+      this.UserController.createUser
+    );
+    this.routes.get("/users", this.UserController.getAllUser);
+    this.routes
+      .route("/users/:id([a-z0-9]{24})") // check if id 24 character for mongodb
+      .get(this.UserController.getUserById)
+      .delete(this.UserController.deleteUser)
+      .put(this.UserController.deleteUser);
+
     return this.routes;
   }
 }

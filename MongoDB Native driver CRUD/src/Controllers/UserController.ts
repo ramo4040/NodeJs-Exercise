@@ -21,7 +21,11 @@ export class UserController implements IUserController {
   getUserById = async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id;
     const result = await this.UserService.getUserById(id);
-    res.status(200).send(result);
+    if (result) {
+      res.status(200).send(result);
+      return;
+    }
+    res.status(404).send({ message: `User Id : ${id} Not found` });
   };
 
   deleteUser = async (req: Request, res: Response): Promise<void> => {

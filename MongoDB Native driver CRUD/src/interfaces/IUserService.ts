@@ -1,8 +1,9 @@
 import { UserModel } from "../Models/UserModel.js";
 
+type UserOrNull = UserModel | null
 export interface IUserService {
   createUser(user: UserModel): Promise<UserModel>;
   getAllUsers();
-  getUserById(id: string): Promise<UserModel>;
-  deleteUser(id: string): Promise<UserModel | null>;
+  getUserById<UserOrNull>(id: string);
+  deleteUser<UserOrNull>(id: string);
 }

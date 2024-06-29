@@ -23,12 +23,12 @@ export class UserService implements IUserService {
     return this.userRepository.getAllUsers();
   }
 
-  async getUserById(id: string): Promise<UserModel> {
+  async getUserById<T>(id: string): Promise<T> {
     const objId = new ObjectId(id);
     return await this.userRepository.getUserById(objId);
   }
 
-  async deleteUser(id: string): Promise<UserModel | null> {
+  async deleteUser<T>(id: string): Promise<T> {
     const objId = new ObjectId(id);
     return await this.userRepository.deleteUser(objId);
   }
