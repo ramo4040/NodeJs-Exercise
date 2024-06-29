@@ -9,12 +9,11 @@ import { UserRepository } from "../Repositories/UserRepository.js";
 
 const container = new Container();
 
-container.bind(TYPES.App).to(App);
-
 container.bind(TYPES.MongoConfig).to(MongoConfig).inSingletonScope();
 container.bind(TYPES.UserRoutes).to(UserRoutes);
 container.bind(TYPES.UserController).to(UserController);
 container.bind(TYPES.UserRepository).to(UserRepository);
 container.bind(TYPES.UserService).to(UserService);
 
+container.bind(TYPES.App).to(App).inSingletonScope();
 export { container };

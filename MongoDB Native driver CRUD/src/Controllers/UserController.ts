@@ -12,4 +12,9 @@ export class UserController implements IUserController {
     const result = await this.UserService.createUser(req.body);
     res.status(201).send(result);
   };
+
+  getAllUser = async (req: Request, res: Response): Promise<void> => {
+    const result = await this.UserService.getAllUsers();
+    res.status(200).send(result);
+  };
 }

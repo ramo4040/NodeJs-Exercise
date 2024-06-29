@@ -10,17 +10,24 @@ export class UserRepository implements IUserRepository {
   private collection: Collection;
 
   constructor(@inject(TYPES.MongoConfig) private mongoConfig: IMongoConfig) {
-    this.connect();
+    mongoConfig.connectToDb(process.env.MONGODB_URI);
+    this.connect()
   }
-
+  
   async connect() {
-    const client = await this.mongoConfig.getDb();
-    this.collection = client.db("mongoTp").collection("Users");
+    this.collection = await this.mongoConfig.getCollection('mongoTp', 'Users');
   }
 
   async createUser(user: UserModel): Promise<UserModel> {
     await this.collection.insertOne(user);
-    this.mongoConfig.closeConnection();
     return user;
+  }
+
+  async getAllUsers(): Promise<UserModel[]> {
+    const users = await this.collection.find({}).toArray();
+    return users.map(
+      (user) =>
+        new UserModel(user._id, user.userName, user.email, user.password)
+    );
   }
 }

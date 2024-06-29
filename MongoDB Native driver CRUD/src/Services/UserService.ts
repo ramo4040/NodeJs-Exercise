@@ -18,4 +18,8 @@ export class UserService implements IUserService {
     user.createdAt = new Date();
     return this.userRepository.createUser(user);
   }
+
+  async getAllUsers() {
+    return this.userRepository.getAllUsers();
+  }
 }

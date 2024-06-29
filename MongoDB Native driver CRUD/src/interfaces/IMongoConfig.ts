@@ -1,6 +1,6 @@
-import { MongoClient } from "mongodb";
+import { Collection } from "mongodb";
 
 export interface IMongoConfig {
-  getDb(): Promise<MongoClient>;
-  closeConnection(): Promise<void>;
+  connectToDb(uri: string): Promise<void>;
+  getCollection(db, collection): Promise<Collection>;
 }

@@ -4,6 +4,7 @@ import express, { Application } from "express";
 import { inject, injectable } from "inversify";
 import TYPES from "./Config/types.js";
 import { IUserRoutes } from "./Interfaces/IUserRoutes.js";
+import { IMongoConfig } from "./Interfaces/IMongoConfig.js";
 @injectable()
 export class App {
   private readonly app: Application;
@@ -13,10 +14,9 @@ export class App {
     this.app = express();
     this.PORT = parseInt(process.env.PORT) || 3000;
     this.init();
-    
   }
 
-  private init() {
+  async init() {
     dotenv.config();
     this.initMiddlewares();
     this.initRoutes();
