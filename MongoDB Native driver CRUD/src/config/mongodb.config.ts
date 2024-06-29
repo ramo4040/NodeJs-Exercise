@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { injectable } from "inversify";
-import { IMongoConfig } from "../interfaces/IMongoConfig.js";
+import { IMongoConfig } from "../Interfaces/IMongoConfig.js";
 import { config } from "dotenv";
 config();
 

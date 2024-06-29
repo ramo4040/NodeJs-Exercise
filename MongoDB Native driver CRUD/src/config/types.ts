@@ -1,8 +1,11 @@
 const TYPES = {
+  App: Symbol.for("App"),
   MongoConfig: Symbol.for("MongoConfig"),
-  UserService: Symbol.for("UserService"),
+  UserRoutes: Symbol.for("UserRoutes"),
   UserController: Symbol.for("UserController"),
   UserModel: Symbol.for("UserModel"),
+  UserRepository: Symbol.for("UserRepository"),
+  UserService: Symbol.for("UserService"),
 };
 
-export default TYPES
+export default TYPES;
