@@ -3,6 +3,8 @@ import { IUserController } from "../Interfaces/IUserController.js";
 import { inject, injectable } from "inversify";
 import { IUserService } from "../Interfaces/IUserService.js";
 import TYPES from "../Config/types.js";
+import { ParamsDictionary } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 
 @injectable()
 export class UserController implements IUserController {
@@ -36,5 +38,15 @@ export class UserController implements IUserController {
       return;
     }
     res.status(404).send({ message: "User Id not found " });
+  };
+
+  updateUser = async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
+    const result = await this.UserService.updateUser(id, req.body);
+    if (result) {
+      res.status(201).send({ message: `User Id : ${id} has been updated` });
+      return;
+    }
+    res.status(404).send({ message: `User Id : ${id} not found` });
   };
 }

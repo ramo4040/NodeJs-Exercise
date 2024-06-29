@@ -40,4 +40,12 @@ export class UserRepository implements IUserRepository {
     const result = await this.collection.findOneAndDelete({ _id: id });
     return result as T;
   }
+
+  async updateUser(id: ObjectId, user: UserModel) {
+    const result = await this.collection.findOneAndUpdate(
+      { _id: id },
+      { $set: user }
+    );
+    return result;
+  }
 }

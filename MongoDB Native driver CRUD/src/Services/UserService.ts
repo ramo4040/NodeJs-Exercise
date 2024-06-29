@@ -32,4 +32,19 @@ export class UserService implements IUserService {
     const objId = new ObjectId(id);
     return await this.userRepository.deleteUser(objId);
   }
+
+  async updateUser(id: string, body) {
+    const { userName, email, password } = body;
+    const _id = new ObjectId(id);
+    const user = new UserModel(_id, userName, email, password);
+    user.updatedAt = new Date();
+    
+    for (const key in user) {
+      if (user.hasOwnProperty(key) && user[key] == undefined) {
+        delete user[key]
+      }
+    }    
+
+    return await this.userRepository.updateUser(_id, user);
+  }
 }
