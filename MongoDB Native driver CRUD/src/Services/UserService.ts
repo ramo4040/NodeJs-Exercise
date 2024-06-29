@@ -11,12 +11,12 @@ export class UserService implements IUserService {
     @inject(TYPES.UserRepository) private userRepository: IUserRepository
   ) {}
 
-  async createUser(body): Promise<UserModel> {
+  async createUser<T>(body): Promise<T> {
     const { userName, email, password } = body;
     const _id = new ObjectId();
     const user = new UserModel(_id, userName, email, password);
     user.createdAt = new Date();
-    return this.userRepository.createUser(user);
+    return this.userRepository.createUser(user) as T;
   }
 
   async getAllUsers() {

@@ -25,7 +25,7 @@ export class UserRoutes {
       .route("/users/:id([a-z0-9]{24})") // check if id 24 character for mongodb
       .get(this.UserController.getUserById)
       .delete(this.UserController.deleteUser)
-      .put(UserValidator.validate, this.UserController.updateUser);
+      .patch(UserValidator.validate, this.UserController.updateUser);
 
     return this.routes;
   }

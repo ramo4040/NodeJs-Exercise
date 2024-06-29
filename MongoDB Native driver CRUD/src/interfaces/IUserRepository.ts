@@ -5,9 +5,9 @@ type UserOrNull = UserModel | null;
 
 export interface IUserRepository {
   connect();
-  createUser(user: UserModel): Promise<UserModel>;
-  getAllUsers(): Promise<UserModel[]>;
-  getUserById<UserOrNull>(id: ObjectId);
-  deleteUser<UserOrNull>(id: ObjectId);
-  updateUser(id: ObjectId, user: UserModel);
+  createUser<UserModel>(user: UserModel): Promise<UserModel>;
+  getAllUsers<UserModel>(): Promise<UserModel[]>;
+  getUserById<UserOrNull>(id: ObjectId): Promise<UserOrNull>;
+  deleteUser<UserOrNull>(id: ObjectId): Promise<UserOrNull>;
+  updateUser<UserModel>(id: ObjectId, user: UserModel);
 }

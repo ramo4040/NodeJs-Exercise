@@ -18,17 +18,14 @@ export class UserRepository implements IUserRepository {
     this.collection = await this.mongoConfig.getCollection("mongoTp", "Users");
   }
 
-  async createUser(user: UserModel): Promise<UserModel> {
+  async createUser<T>(user: T): Promise<T> {
     await this.collection.insertOne(user);
-    return user;
+    return user as T;
   }
 
-  async getAllUsers(): Promise<UserModel[]> {
+  async getAllUsers<T>(): Promise<T[]> {
     const users = await this.collection.find({}).toArray();
-    return users.map(
-      (user) =>
-        new UserModel(user._id, user.userName, user.email, user.password)
-    );
+    return users as T[]
   }
 
   async getUserById<T>(id: ObjectId): Promise<T> {
@@ -41,11 +38,11 @@ export class UserRepository implements IUserRepository {
     return result as T;
   }
 
-  async updateUser(id: ObjectId, user: UserModel) {
+  async updateUser<T>(id: ObjectId, user: T): Promise<T> {
     const result = await this.collection.findOneAndUpdate(
       { _id: id },
       { $set: user }
     );
-    return result;
+    return result as T;
   }
 }
