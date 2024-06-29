@@ -3,7 +3,7 @@ import { IUserRepository } from "../Interfaces/IUserRepository.js";
 import { UserModel } from "../Models/UserModel.js";
 import TYPES from "../Config/types.js";
 import { IMongoConfig } from "../Interfaces/IMongoConfig.js";
-import { Collection } from "mongodb";
+import { Collection, ObjectId } from "mongodb";
 
 @injectable()
 export class UserRepository implements IUserRepository {
@@ -11,11 +11,11 @@ export class UserRepository implements IUserRepository {
 
   constructor(@inject(TYPES.MongoConfig) private mongoConfig: IMongoConfig) {
     mongoConfig.connectToDb(process.env.MONGODB_URI);
-    this.connect()
+    this.connect();
   }
-  
+
   async connect() {
-    this.collection = await this.mongoConfig.getCollection('mongoTp', 'Users');
+    this.collection = await this.mongoConfig.getCollection("mongoTp", "Users");
   }
 
   async createUser(user: UserModel): Promise<UserModel> {
@@ -29,5 +29,10 @@ export class UserRepository implements IUserRepository {
       (user) =>
         new UserModel(user._id, user.userName, user.email, user.password)
     );
+  }
+
+  async getUserById(id: ObjectId): Promise<UserModel> {
+    const user = await this.collection.findOne({ _id: id });
+    return user as UserModel;
   }
 }

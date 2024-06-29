@@ -22,4 +22,9 @@ export class UserService implements IUserService {
   async getAllUsers() {
     return this.userRepository.getAllUsers();
   }
+
+  async getUserById(id: string): Promise<UserModel> {
+    const objId = new ObjectId(id);
+    return await this.userRepository.getUserById(objId);
+  }
 }

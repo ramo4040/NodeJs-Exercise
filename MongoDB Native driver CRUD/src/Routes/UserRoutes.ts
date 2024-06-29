@@ -17,6 +17,7 @@ export class UserRoutes {
   public registerRoutes(): Router {
     this.routes.post("/users", UserValidator.validate, this.UserController.createUser);
     this.routes.get("/users",this.UserController.getAllUser);
+    this.routes.get("/users/:id",this.UserController.getUserById);
     return this.routes;
   }
 }
