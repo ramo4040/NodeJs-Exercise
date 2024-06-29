@@ -18,6 +18,7 @@ export class UserRoutes {
     this.routes.post("/users", UserValidator.validate, this.UserController.createUser);
     this.routes.get("/users",this.UserController.getAllUser);
     this.routes.get("/users/:id",this.UserController.getUserById);
+    this.routes.delete("/users/:id",this.UserController.deleteUser);
     return this.routes;
   }
 }

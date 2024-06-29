@@ -23,4 +23,14 @@ export class UserController implements IUserController {
     const result = await this.UserService.getUserById(id);
     res.status(200).send(result);
   };
+
+  deleteUser = async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
+    const result = await this.UserService.deleteUser(id);
+    if (result) {
+      res.status(200).send({ message: "User has been deleted" });
+      return;
+    }
+    res.status(404).send({ message: "User Id not found " });
+  };
 }

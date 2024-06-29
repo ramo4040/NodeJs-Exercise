@@ -27,4 +27,9 @@ export class UserService implements IUserService {
     const objId = new ObjectId(id);
     return await this.userRepository.getUserById(objId);
   }
+
+  async deleteUser(id: string): Promise<UserModel | null> {
+    const objId = new ObjectId(id);
+    return await this.userRepository.deleteUser(objId);
+  }
 }

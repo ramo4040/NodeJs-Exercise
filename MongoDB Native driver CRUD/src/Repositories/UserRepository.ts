@@ -35,4 +35,9 @@ export class UserRepository implements IUserRepository {
     const user = await this.collection.findOne({ _id: id });
     return user as UserModel;
   }
+
+  async deleteUser(id: ObjectId): Promise<UserModel | null> {
+    const result = await this.collection.findOneAndDelete({ _id: id });
+    return result as UserModel | null;
+  }
 }
