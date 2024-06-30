@@ -1,6 +1,5 @@
 import { inject, injectable } from "inversify";
 import { IUserRepository } from "../Interfaces/IUserRepository.js";
-import { UserModel } from "../Models/UserModel.js";
 import TYPES from "../Config/types.js";
 import { IMongoConfig } from "../Interfaces/IMongoConfig.js";
 import { Collection, ObjectId } from "mongodb";
