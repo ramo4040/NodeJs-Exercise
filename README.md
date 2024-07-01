@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="https://skillicons.dev/icons?i=typescript,nodejs,expressjs,prisma,mongodb,mysql,postman" width="600px" />
+</p>
+
 <details>
   <summary><h3>SimpleCRM - Facturation en Ligne</h3></summary>
   <p>
