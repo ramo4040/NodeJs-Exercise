@@ -3,6 +3,10 @@ import IUserService from "../core/Interfaces/IUserService";
 import { UserModel } from "../Models/UserModel";
 import { TYPES } from "@src/core/Constants/types";
 import IUserRepository from "../core/Interfaces/IUserRepository";
+import bcrypt from "bcrypt";
+import Jwt from "jsonwebtoken";
+import { env } from "../core/Config/env";
+import { decodeToken } from "../core/Interfaces/IUserService";
 
 interface UserData {
   email: string;
@@ -24,7 +28,20 @@ export default class UserService implements IUserService {
     return await this.UserRepository.createUser(user);
   }
 
-  async login(email: string): Promise<UserModel | null> {
-    return await this.UserRepository.getUserByEmail(email);
+  async login(data: UserModel): Promise<UserModel | null> {
+    const user = await this.UserRepository.getUserByEmail(data.email);
+    return user && (await bcrypt.compare(data.password, user.password))
+      ? user
+      : null;
+  }
+
+  async generateToken(data: UserModel): Promise<string> {
+    return await Jwt.sign({ id: data._id }, env.JWT_SECRET_KEY, {
+      expiresIn: "1h",
+    });
+  }
+
+  async verify(token: string): Promise<decodeToken> {
+    return Jwt.verify(token, env.JWT_SECRET_KEY) as decodeToken;
   }
 }

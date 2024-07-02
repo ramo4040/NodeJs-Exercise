@@ -1,5 +1,6 @@
 import express from "express";
 import IRoutes from "./core/Interfaces/IRoutes";
+import cookieparser from "cookie-parser";
 
 interface ServerOptions {
   port: number;
@@ -18,6 +19,7 @@ export default class Server {
 
   async start(): Promise<void> {
     this.app.use(express.json());
+    this.app.use(cookieparser());
     this.app.use(express.urlencoded({ extended: true }));
 
     this.app.use(this.apiPrefix, this.UserRoutes.registerRoutes());

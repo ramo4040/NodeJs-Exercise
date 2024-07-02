@@ -3,9 +3,9 @@ import { ObjectId } from "mongodb";
 
 export class UserModel {
   constructor(
-    private email: string,
-    private password: string,
-    private _id?: ObjectId,
+    public email: string,
+    public password: string,
+    public _id?: ObjectId,
   ) {
     this._id = new ObjectId();
   }

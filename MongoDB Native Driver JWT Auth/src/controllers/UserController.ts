@@ -19,13 +19,27 @@ export default class UserController implements IUserController {
   };
 
   login = async (req: Request, res: Response): Promise<void> => {
-    const user = await this.UserService.login(req.body.email);
+    const user = await this.UserService.login(req.body);
+
     if (!user) {
       res
         .status(HttpCode.NOT_FOUND)
         .send({ message: "Email or Password invalid" });
       return;
     }
-    res.status(HttpCode.OK).send(user);
+
+    const token = await this.UserService.generateToken(user);
+
+    res
+      .status(HttpCode.OK)
+      .cookie("jwt", token, {
+        httpOnly: true,
+        path: "/",
+        domain: "localhost",
+        // secure: true, // https
+        sameSite: "strict",
+        maxAge: 3600, // 1 hour
+      })
+      .send(user);
   };
 }

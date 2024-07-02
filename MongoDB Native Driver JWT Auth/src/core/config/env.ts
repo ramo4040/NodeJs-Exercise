@@ -8,4 +8,5 @@ export const env = {
     .default("/api/v1")
     .asString(),
   MONGODB_URI: get("MONGODB_URI").required().asUrlString(),
+  JWT_SECRET_KEY: get("JWT_SECRET_KEY").required().asString(),
 };
