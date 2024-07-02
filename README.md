@@ -77,37 +77,6 @@ This project is licensed under the MIT license.
 
 Create a Node.js application that allows users to register, log in, and authenticate using JWT. Implement APIs for registration, login, and accessing a protected route using a well-organized project structure.
 
-## Project Structure
-
-```
-└── 📁jwt auth example
-    └── 📁prisma
-        └── schema.prisma
-    └── 📁src
-        └── 📁Config
-            └── prisma.ts
-        └── 📁Controllers
-            └── AuthController.ts
-        └── 📁Middleware
-            └── AuthMiddleware.ts
-        └── 📁Models
-            └── UserModel.ts
-        └── 📁Routes
-            └── AuthRoutes.ts
-        └── 📁Services
-            └── AuthService.ts
-            └── UserService.ts
-        └── 📁Validation
-            └── AuthValidator.ts
-        └── app.ts
-        └── server.ts
-    └── .env
-    └── .gitignore
-    └── nodemon.json
-    └── package-lock.json
-    └── package.json
-    └── tsconfig.json
-```
 
 ## Routes
 
