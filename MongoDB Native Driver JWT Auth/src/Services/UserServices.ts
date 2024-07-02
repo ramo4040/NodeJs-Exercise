@@ -15,13 +15,16 @@ export default class UserService implements IUserService {
     @inject(TYPES.UserRepository) private UserRepository: IUserRepository
   ) {}
 
-  async signUp(data: UserData): Promise<UserModel> {
+  async signUp(data: UserData): Promise<UserModel | null> {
+    const isEmailExists = await this.UserRepository.getUserByEmail(data.email);
+    if (isEmailExists) return null;
+
     const user = new UserModel(data.email, data.password);
-    await user.hashPassword()    
-    return this.UserRepository.createUser(user);
+    await user.hashPassword();
+    return await this.UserRepository.createUser(user);
   }
 
   async login(email: string): Promise<UserModel | null> {
-    return this.UserRepository.getUserByEmail(email);
+    return await this.UserRepository.getUserByEmail(email);
   }
 }
