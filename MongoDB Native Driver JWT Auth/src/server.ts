@@ -12,7 +12,7 @@ export default class Server {
   private readonly port: number;
   private readonly apiPrefix: string;
 
-  constructor(option: ServerOptions, private UserRoutes: IRoutes) {
+  constructor(option: ServerOptions, private BaseRoutes: IRoutes) {
     this.port = option.port;
     this.apiPrefix = option.apiPrefix;
   }
@@ -22,7 +22,7 @@ export default class Server {
     this.app.use(cookieparser());
     this.app.use(express.urlencoded({ extended: true }));
 
-    this.app.use(this.apiPrefix, this.UserRoutes.registerRoutes());
+    this.app.use(this.apiPrefix, this.BaseRoutes.routes);
 
     this.app.listen(this.port, () => {
       console.log(`Server running on port http://localhost:${this.port}`);

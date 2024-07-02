@@ -6,7 +6,6 @@ import IUserRepository from "../core/Interfaces/IUserRepository";
 import bcrypt from "bcrypt";
 import Jwt from "jsonwebtoken";
 import { env } from "../core/Config/env";
-import { decodeToken } from "../core/Interfaces/IUserService";
 
 interface UserData {
   email: string;
@@ -39,9 +38,5 @@ export default class UserService implements IUserService {
     return await Jwt.sign({ id: data._id }, env.JWT_SECRET_KEY, {
       expiresIn: "1h",
     });
-  }
-
-  async verify(token: string): Promise<decodeToken> {
-    return Jwt.verify(token, env.JWT_SECRET_KEY) as decodeToken;
   }
 }

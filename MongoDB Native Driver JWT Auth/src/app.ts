@@ -10,7 +10,7 @@ async function main(): Promise<void> {
   const mongoDB = container.get(TYPES.MongoDb) as IMongoDbConfig;
   await mongoDB.connectMongoDB();
 
-  const routes = container.get(TYPES.UserRoutes) as IRoutes;
+  const routes = container.get(TYPES.BaseRoutes) as IRoutes;
   const server = new Server(
     {
       port: env.PORT,

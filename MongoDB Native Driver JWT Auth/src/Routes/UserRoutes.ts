@@ -6,27 +6,26 @@ import IUserValidation from "../core/Interfaces/IUserValidation";
 
 @injectable()
 export class UserRoutes {
-  private routes: Router;
+  public routes: Router;
 
   constructor(
     @inject(TYPES.UserController) private UserController: IUserController,
     @inject(TYPES.UserValidation) private UserValidation: IUserValidation
   ) {
     this.routes = Router();
+    this.registerRoutes();
   }
 
-  public registerRoutes(): Router {
+  public registerRoutes(): void {
     this.routes.post(
-      "/auth/register",
+      "/register",
       this.UserValidation.validate,
       this.UserController.signUp
     );
     this.routes.post(
-      "/auth/login",
+      "/login",
       this.UserValidation.validate,
       this.UserController.login
     );
-
-    return this.routes;
   }
 }

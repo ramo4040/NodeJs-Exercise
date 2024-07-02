@@ -38,7 +38,7 @@ export default class UserController implements IUserController {
         domain: "localhost",
         // secure: true, // https
         sameSite: "strict",
-        maxAge: 3600, // 1 hour
+        maxAge: 60 * 60 * 1000, // 1 hour
       })
       .send(user);
   };
