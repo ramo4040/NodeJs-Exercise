@@ -69,7 +69,7 @@ This project is licensed under the MIT license.
 </details>
 
 <details>
-  <summary><h3>JWT auth example</h3></summary>
+  <summary><h3>JWT auth MYSQL & JWT auth MongoDB Native</h3></summary>
 
   <p>
 
