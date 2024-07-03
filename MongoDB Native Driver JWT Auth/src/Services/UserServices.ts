@@ -19,9 +19,6 @@ export default class UserService implements IUserService {
   ) {}
 
   async signUp(data: UserData): Promise<UserModel | null> {
-    const isEmailExists = await this.UserRepository.getUserByEmail(data.email);
-    if (isEmailExists) return null;
-
     const user = new UserModel(data.email, data.password);
     await user.hashPassword();
     return await this.UserRepository.createUser(user);

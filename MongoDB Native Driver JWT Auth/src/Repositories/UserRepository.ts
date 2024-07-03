@@ -13,9 +13,13 @@ export default class UserRepository implements IUserRepository {
     this.db = this.mongodb.client.db("mongoTp").collection("Users");
   }
 
-  async createUser<T>(user: T): Promise<T> {
-    const result = await this.db.insertOne(user as Document);
-    return { _id: result.insertedId, ...user };
+  async createUser<T>(user: T): Promise<T | null> {
+    try {
+      const result = await this.db.insertOne(user as Document);
+      return { _id: result.insertedId, ...user };
+    } catch (error: any) {
+      return null;
+    }
   }
 
   async getUserByEmail(email: string): Promise<UserModel | null> {
