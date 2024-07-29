@@ -4,7 +4,7 @@
     "target": "ES2020", // Set the JavaScript version for output files
     "module": "NodeNext", // Set the module system (Node.js uses CommonJS)
     "strict": true, // Enable all strict type-checking options
-    "baseUrl": ".", // Base directory to resolve non-relative module names
+    "baseUrl": "./src", // Base directory to resolve non-relative module names
     "outDir": "dist", // Redirect output structure to the 'dist' folder
     "rootDir": ".", // Specify the root directory of source files
     "skipLibCheck": true, // Skip type checking of all declaration files (*.d.ts)
@@ -14,13 +14,27 @@
     "removeComments": true,
     "types": ["reflect-metadata"],
 
+    "paths": {
+      "@/*": ["*"],
+      "@src/*": ["src/*"],
+      "@config/*": ["config/*"],
+      "@core/*": ["core/*"],
+      "@controllers/*": ["controllers/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@models/*": ["models/*"],
+      "@routes/*": ["routes/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    },
+
     "strictNullChecks": true, // Enable strict null checks
     "strictFunctionTypes": true, // Enable strict checking of function types
     "strictPropertyInitialization": true, // Ensure non-undefined class properties are initialized in the constructor
     "strictBindCallApply": true, // Enable stricter checking of the bind, call, and apply methods on functions
     "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
 
-    "noImplicitAny": true, // Raise error on expressions and declarations with an implied 'any' type
+    "noImplicitAny": false, // Raise error on expressions and declarations with an implied 'any' type
     "noImplicitThis": true, // Raise error on 'this' expressions with an implied 'any' type
     "alwaysStrict": true, // Parse in strict mode and emit "use strict" for each source file
 
