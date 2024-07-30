@@ -16,5 +16,6 @@ export default class AuthRoutes implements IAuthRoutes {
 
   registerRoutes(): void {
     this.router.post('/register', this.AuthController.register)
+    this.router.post('/login', this.AuthController.login)
   }
 }

@@ -19,4 +19,14 @@ export default class AuthController implements IAuthController {
     const result = await this.AuthService.register(req.body)
     res.status(result.status).send(result)
   }
+
+  /**
+   *
+   * @param req The express request object
+   * @param res The express response object
+   */
+  login = async (req: Request, res: Response): Promise<void> => {
+    const result = await this.AuthService.login(req.body)
+    res.status(result.status).send(result)
+  }
 }

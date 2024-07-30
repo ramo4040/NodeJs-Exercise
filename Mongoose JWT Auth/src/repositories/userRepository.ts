@@ -16,4 +16,13 @@ export default class UserRepository implements IUserRepository<IUser> {
       password: data.password,
     })
   }
+
+  /**
+   *
+   * @param email user email @type String
+   * @returns user if found if not return null
+   */
+  async findByEmail(email: string): Promise<IUser | null> {
+    return await UserModel.findOne({ email: email })
+  }
 }
