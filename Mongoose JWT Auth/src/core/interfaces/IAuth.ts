@@ -1,4 +1,4 @@
-import { type Request, type Response, type Router } from 'express'
+import { NextFunction, type Request, type Response, type Router } from 'express'
 import { IUser } from './IUser'
 
 export interface IAuthController {
@@ -14,16 +14,19 @@ export interface IAuthRoutes {
   router: Router
   registerRoutes(): void
 }
-
 export interface IRegistrationData {
   username: string
   email: string
   password: string
   confirmPassword: string
 }
-
 export interface IStatusMessage {
   status: number
   message: string
   user?: IUser | null
+  token?: string
+}
+
+export interface IAuthMiddleware {
+  verifyToken(req: Request, res: Response, next: NextFunction): Promise<void>
 }

@@ -27,6 +27,18 @@ export default class AuthController implements IAuthController {
    */
   login = async (req: Request, res: Response): Promise<void> => {
     const result = await this.AuthService.login(req.body)
+    // add token in cookie
+    if (result?.token) {
+      res.cookie('jwt', result.token, {
+        httpOnly: true,
+        domain: 'localhost',
+        path: '/',
+        // secure: true, // https
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 1000,
+      })
+    }
+
     res.status(result.status).send(result)
   }
 }

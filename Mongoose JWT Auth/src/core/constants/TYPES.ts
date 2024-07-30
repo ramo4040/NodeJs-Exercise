@@ -6,12 +6,14 @@ const TYPES = {
   //auth
   AuthController: Symbol.for('AuthController'),
   AuthService: Symbol.for('AuthService'),
+  AuthMiddleware: Symbol.for('AuthMiddleware'),
 
   //user
   UserRepository: Symbol.for('UserRepository'),
 
   //Utils
   PasswordHasher: Symbol.for('PasswordHasher'),
+  AuthToken: Symbol.for('AuthToken'),
 }
 
 export default TYPES

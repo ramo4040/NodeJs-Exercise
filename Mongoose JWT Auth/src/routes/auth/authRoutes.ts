@@ -7,9 +7,7 @@ import { inject, injectable } from 'inversify'
 export default class AuthRoutes implements IAuthRoutes {
   public readonly router: Router
 
-  constructor(
-    @inject(TYPES.AuthController) private AuthController: IAuthController,
-  ) {
+  constructor(@inject(TYPES.AuthController) private AuthController: IAuthController) {
     this.router = Router()
     this.registerRoutes()
   }
