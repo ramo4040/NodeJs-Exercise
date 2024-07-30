@@ -1,27 +1,27 @@
-import "reflect-metadata";
-import container from "./core/config/inversify.config";
-import TYPES from "./core/constants/TYPES";
-import IBaseRoutes from "./core/interfaces/IRoutes";
-import env from "./core/config/env";
-import Server from "./server";
+import 'reflect-metadata'
+import container from './core/config/inversify.config'
+import TYPES from './core/constants/TYPES'
+import IBaseRoutes from './core/interfaces/IRoutes'
+import env from './core/config/env'
+import Server from './server'
 
 const main = async (): Promise<void> => {
   try {
-    const BaseRouter = container.get(TYPES.BaseRoutes) as IBaseRoutes;
+    const BaseRouter = container.get(TYPES.BaseRoutes) as IBaseRoutes
     const server = new Server(
       {
         port: env.port,
         apiPrefix: env.apiPrefix,
       },
-      BaseRouter
-    );
+      BaseRouter,
+    )
 
-    await server.mongodbConnect();
+    await server.mongodbConnect()
 
-    void server.start();
+    void server.start()
   } catch (error) {
-    console.log((error as Error).message);
+    console.log((error as Error).message)
   }
-};
+}
 
-main();
+main()

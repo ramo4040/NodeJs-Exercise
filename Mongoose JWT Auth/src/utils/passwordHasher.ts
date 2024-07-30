@@ -1,5 +1,5 @@
-import bcrypt from "bcrypt";
-import { injectable } from "inversify";
+import bcrypt from 'bcrypt'
+import { injectable } from 'inversify'
 
 /**
  * This class provides utility methods for  hashing and comparing passwords.
@@ -12,7 +12,7 @@ export default class PasswordHasher {
    * @returns A promise hashed password string.
    */
   async hashPassword(password: string): Promise<string> {
-    return await bcrypt.hash(password, 10);
+    return await bcrypt.hash(password, 10)
   }
   /**
    * Compares a given password with a hashed password.
@@ -21,6 +21,6 @@ export default class PasswordHasher {
    * @returns A promise that resolves to true if the passwords match, false otherwise.
    */
   async comparePassword(password: string, hashedPwd: string): Promise<boolean> {
-    return await bcrypt.compare(password, hashedPwd);
+    return await bcrypt.compare(password, hashedPwd)
   }
 }

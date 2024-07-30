@@ -1,5 +1,5 @@
-import { IUser } from "@/core/interfaces/IUser";
-import { Schema, model, Model } from "mongoose";
+import { IUser } from '@/core/interfaces/IUser'
+import { Schema, model, Model } from 'mongoose'
 
 const userSchema = new Schema<IUser>(
   {
@@ -13,7 +13,7 @@ const userSchema = new Schema<IUser>(
     password: { type: String, required: true },
     emailVerified: { type: Boolean, default: false },
   },
-  { collection: "Users" }
-);
+  { collection: 'Users' },
+)
 
-export const UserModel: Model<IUser> = model("Users", userSchema);
+export const UserModel: Model<IUser> = model('Users', userSchema)
