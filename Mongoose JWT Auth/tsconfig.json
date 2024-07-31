@@ -25,6 +25,7 @@
       "@models/*": ["models/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
+      "@validator/*": ["validator/*"],
       "@utils/*": ["utils/*"]
     },
 

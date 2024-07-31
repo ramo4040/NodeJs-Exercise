@@ -15,6 +15,9 @@ const TYPES = {
   //Utils
   PasswordHasher: Symbol.for('PasswordHasher'),
   AuthToken: Symbol.for('AuthToken'),
+
+  //Validator
+  AuthValidator: Symbol.for('AuthValidator'),
 }
 
 export default TYPES

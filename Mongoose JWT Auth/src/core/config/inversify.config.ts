@@ -8,7 +8,8 @@ import PasswordHasher from '@/utils/passwordHasher'
 import UserRepository from '@/repositories/userRepository'
 import AuthToken from '@/utils/authToken'
 import AuthMiddleware from '@/middlewares/authMiddleware'
-import RefreshTokenRepo from '@/repositories/RefreshTokenRepo'
+import RefreshTokenRepo from '@/repositories/refreshTokenRepo'
+import AuthValidator from '@/validator/authValidator'
 
 const container = new Container()
 
@@ -25,5 +26,8 @@ container.bind(TYPES.AuthToken).to(AuthToken)
 //user
 container.bind(TYPES.UserRepository).to(UserRepository)
 container.bind(TYPES.RefreshTokenRepo).to(RefreshTokenRepo)
+
+// Validator
+container.bind(TYPES.AuthValidator).to(AuthValidator)
 
 export default container
