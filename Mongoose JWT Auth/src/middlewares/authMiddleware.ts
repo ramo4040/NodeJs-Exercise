@@ -16,7 +16,7 @@ export default class AuthMiddleware implements IAuthMiddleware {
   verifyToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { accessToken, refreshToken } = req.cookies
 
-    const decodeAccessToken = await this.AuthToken.verify(accessToken, env.ACCESS_TOKEN_KEY)
+    const decodeAccessToken = await this.AuthToken.verify(accessToken, env.ACCESS_TOKEN.secret)
     // access token  valid
     if (decodeAccessToken) {
       res.locals.user = decodeAccessToken
@@ -24,7 +24,7 @@ export default class AuthMiddleware implements IAuthMiddleware {
       return
     }
 
-    const decodeRefreshToken = await this.AuthToken.verify(refreshToken, env.REFRESH_TOKEN_KEY)
+    const decodeRefreshToken = await this.AuthToken.verify(refreshToken, env.REFRESH_TOKEN.secret)
     // if access token invalid or expired
     if (decodeRefreshToken) {
       // check if refresh token exist
