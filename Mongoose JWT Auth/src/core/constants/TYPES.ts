@@ -10,6 +10,7 @@ const TYPES = {
 
   //user
   UserRepository: Symbol.for('UserRepository'),
+  RefreshTokenRepo: Symbol.for('RefreshTokenRepo'),
 
   //Utils
   PasswordHasher: Symbol.for('PasswordHasher'),

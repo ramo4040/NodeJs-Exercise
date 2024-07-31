@@ -1,4 +1,3 @@
-import { JwtPayload } from 'jsonwebtoken'
 import { IUser } from './IUser'
 
 export interface IPasswordHasher {
@@ -7,6 +6,14 @@ export interface IPasswordHasher {
 }
 
 export interface IAuthToken {
-  generateToken(data: IUser): Promise<string>
-  verify(token: string): Promise<JwtPayload | string | null>
+  generateAccessToken(data: IUser): Promise<string>
+  generateRefreshToken(data: IUser): Promise<string>
+  verify(token: string, key: string): Promise<IJwtPayload | null>
+}
+
+export interface IJwtPayload extends IUser {
+  email: string
+  username: string
+  iat: number
+  exp: number
 }

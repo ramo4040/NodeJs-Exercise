@@ -1,8 +1,8 @@
 import env from '@/core/config/env'
 import { IUser } from '@/core/interfaces/IUser'
-import { IAuthToken } from '@/core/interfaces/IUtils'
+import { IAuthToken, IJwtPayload } from '@/core/interfaces/IUtils'
 import { injectable } from 'inversify'
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 
 @injectable()
 export default class AuthToken implements IAuthToken {
@@ -11,9 +11,15 @@ export default class AuthToken implements IAuthToken {
    * @param data object container user information
    * @returns jwt token @type String
    */
-  async generateToken(data: IUser): Promise<string> {
-    return await jwt.sign({ id: data.id, email: data.email, username: data.username }, env.jwt_token, {
-      expiresIn: '1h',
+  async generateAccessToken(data: IUser): Promise<string> {
+    return await jwt.sign({ _id: data._id, email: data.email, username: data.username }, env.ACCESS_TOKEN_KEY, {
+      expiresIn: '15m',
+    })
+  }
+
+  async generateRefreshToken(data: IJwtPayload): Promise<string> {
+    return await jwt.sign({ _id: data._id, email: data.email, username: data.username }, env.REFRESH_TOKEN_KEY, {
+      expiresIn: '1w',
     })
   }
 
@@ -21,9 +27,9 @@ export default class AuthToken implements IAuthToken {
    * @param token token from cookie when user need to acces some protected resources
    * @returns decode object container user Information stored in jwt token
    */
-  async verify(token: string): Promise<JwtPayload | string | null> {
+  async verify(token: string, key: string): Promise<IJwtPayload | null> {
     try {
-      const decodedToken = await jwt.verify(token, env.jwt_token)
+      const decodedToken = (await jwt.verify(token, key)) as IJwtPayload
       return decodedToken
     } catch (error) {
       // if token undefined

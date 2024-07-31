@@ -1,6 +1,6 @@
 import { IRegistrationData } from '@/core/interfaces/IAuth'
 import { IUser, IUserRepository } from '@/core/interfaces/IUser'
-import { UserModel } from '@/models/userModel'
+import { UserModel } from '@/models/user.model'
 import { injectable } from 'inversify'
 
 @injectable()
@@ -23,6 +23,6 @@ export default class UserRepository implements IUserRepository<IUser> {
    * @returns user if found if not return null
    */
   async findByEmail(email: string): Promise<IUser | null> {
-    return await UserModel.findOne({ email: email })
+    return await UserModel.findOne({ email: email }).exec()
   }
 }
