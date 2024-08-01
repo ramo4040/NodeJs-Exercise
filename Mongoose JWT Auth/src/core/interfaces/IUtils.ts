@@ -8,6 +8,7 @@ export interface IPasswordHasher {
 export interface IAuthToken {
   generateAccessToken(data: IUser): Promise<string>
   generateRefreshToken(data: IUser): Promise<string>
+  generateVerifyEmailToken(username: string): Promise<string>
   verify(token: string, key: string): Promise<IJwtPayload | null>
 }
 
@@ -16,4 +17,8 @@ export interface IJwtPayload extends IUser {
   username: string
   iat: number
   exp: number
+}
+
+export interface INodeMailer {
+  sendMail(options: object): Promise<void>
 }

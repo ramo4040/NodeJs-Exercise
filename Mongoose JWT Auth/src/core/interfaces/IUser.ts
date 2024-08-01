@@ -1,5 +1,5 @@
 import { IRegistrationData } from './IAuth'
-import { Document, ObjectId } from 'mongoose'
+import { Document, ObjectId, UpdateWriteOpResult } from 'mongoose'
 
 export interface IUser {
   _id: ObjectId
@@ -17,9 +17,9 @@ export interface IUserRefreshToken extends Document {
 
 export interface IUserRepository<T> {
   createUser(data: IRegistrationData): Promise<T>
-  findByEmail(email: string): Promise<T | null>
+  findOne(data: Partial<T>): Promise<T | null>
+  update(filter: Partial<T>, data: Partial<T>): Promise<UpdateWriteOpResult>
   //   findAll(): Promise<T[]>;
-  //   update(id: string, data: T): Promise<T | null>;
   //   delete(id: string): Promise<T | null>;
 }
 

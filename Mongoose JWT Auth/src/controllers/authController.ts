@@ -14,6 +14,7 @@ export default class AuthController implements IAuthController {
    * Handles {POST} requests '/auth/register' endpoint.
    * Handles {POST} requests '/auth/login' endpoint.
    * Handles {GET} requests '/auth/logout' endpoint.
+   * Handles {GET} requests '/auth/verify-email' endpoint.
    * @param req The Express request object
    * @param res The Express response object
    */
@@ -48,6 +49,12 @@ export default class AuthController implements IAuthController {
       res.clearCookie('accessToken')
       res.clearCookie('refreshToken')
     }
+    res.status(status).send({ message: message })
+  }
+
+  verifyEmail = async (req: Request, res: Response): Promise<void> => {
+    // check if token is valid and user exist
+    const { status, message } = await this.AuthService.verifyEmail(req.query.token as string)
     res.status(status).send({ message: message })
   }
 }

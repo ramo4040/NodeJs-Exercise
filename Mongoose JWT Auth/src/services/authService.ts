@@ -1,7 +1,8 @@
+import env from '@/core/config/env'
 import TYPES from '@/core/constants/TYPES'
 import { IAuthService, IRegistrationData, IStatusMessage } from '@/core/interfaces/IAuth'
 import { IRefreshTokenRepo, IUser, IUserRefreshToken, IUserRepository } from '@/core/interfaces/IUser'
-import { IAuthToken, IPasswordHasher } from '@/core/interfaces/IUtils'
+import { IAuthToken, INodeMailer, IPasswordHasher } from '@/core/interfaces/IUtils'
 import { inject, injectable } from 'inversify'
 
 @injectable()
@@ -18,6 +19,7 @@ export default class AuthService implements IAuthService {
     private UserRepository: IUserRepository<IUser>,
     @inject(TYPES.AuthToken) private AuthToken: IAuthToken,
     @inject(TYPES.RefreshTokenRepo) private RefreshTokenRepo: IRefreshTokenRepo<IUserRefreshToken>,
+    @inject(TYPES.NodeMailer) private NodeMailer: INodeMailer,
   ) {}
 
   /**
@@ -33,6 +35,8 @@ export default class AuthService implements IAuthService {
       data.password = await this.PasswordHasher.hashPassword(data.password)
       // create user in database
       await this.UserRepository.createUser(data)
+      // send email verification
+      await this.sendVerificationEmail(data.username, data.email)
       // return promise object
       return {
         success: true,
@@ -42,6 +46,24 @@ export default class AuthService implements IAuthService {
     } catch (error: any) {
       return await this.handleRegistrationError(error)
     }
+  }
+
+  /**
+   * Sends a verification email to the user.
+   * @param username - The username of the user.
+   * @param email - The email address of the user.
+   * @returns Promise<void>
+   */
+  private async sendVerificationEmail(username: string, email: string): Promise<void> {
+    const verifyEmailToken = await this.AuthToken.generateVerifyEmailToken(username)
+    const verificationUrl = `http://localhost:3000/api/v1/auth/verify-email?token=${verifyEmailToken}`
+    const mailoptions = {
+      from: env.MAILER.user,
+      to: email,
+      subject: 'Verify Your Email',
+      html: `<a href="${verificationUrl}">${verificationUrl}</a>`,
+    }
+    this.NodeMailer.sendMail(mailoptions)
   }
 
   /**
@@ -71,7 +93,7 @@ export default class AuthService implements IAuthService {
    * @returns return promise object IStatusMessage.
    */
   async login(data: IRegistrationData): Promise<IStatusMessage> {
-    const user = await this.UserRepository.findByEmail(data.email)
+    const user = await this.UserRepository.findOne({ email: data.email })
     try {
       // if user exist
       if (user) {
@@ -131,6 +153,32 @@ export default class AuthService implements IAuthService {
       success: false,
       status: 404,
       message: 'Invalid refresh token.',
+    }
+  }
+
+  /**
+   *
+   * @param verifyToken token generated when user register
+   * @returns return promise object IStatusMessage.
+   */
+  async verifyEmail(verifyToken: string): Promise<IStatusMessage> {
+    const decodeVmToken = await this.AuthToken.verify(verifyToken, env.VERIFY_EMAIL.secret)
+    // check if token valid
+    if (decodeVmToken) {
+      // update verified
+      const user = await this.UserRepository.update({ username: decodeVmToken.username }, { emailVerified: true })
+      if (user.matchedCount) {
+        return {
+          success: true,
+          status: 200,
+          message: 'Your email address has been successfully verified.',
+        }
+      }
+    }
+    return {
+      success: false,
+      status: 400,
+      message: 'Invalid verification token.',
     }
   }
 }

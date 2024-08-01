@@ -10,6 +10,7 @@ import AuthToken from '@/utils/authToken'
 import AuthMiddleware from '@/middlewares/authMiddleware'
 import RefreshTokenRepo from '@/repositories/refreshTokenRepo'
 import AuthValidator from '@/validator/authValidator'
+import NodeMailer from '@/utils/mailer'
 
 const container = new Container()
 
@@ -22,6 +23,7 @@ container.bind(TYPES.AuthMiddleware).to(AuthMiddleware)
 //Utils
 container.bind(TYPES.PasswordHasher).to(PasswordHasher)
 container.bind(TYPES.AuthToken).to(AuthToken)
+container.bind(TYPES.NodeMailer).to(NodeMailer)
 
 //user
 container.bind(TYPES.UserRepository).to(UserRepository)

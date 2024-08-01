@@ -5,12 +5,14 @@ export interface IAuthController {
   register(req: Request, res: Response): Promise<void>
   login(req: Request, res: Response): Promise<void>
   logout(req: Request, res: Response): Promise<void>
+  verifyEmail(req: Request, res: Response): Promise<void>
 }
 
 export interface IAuthService {
   register(data: IRegistrationData): Promise<IStatusMessage>
   login(data: IRegistrationData): Promise<IStatusMessage>
   logout(refreshToken: string): Promise<IStatusMessage>
+  verifyEmail(verifyToken: string): Promise<IStatusMessage>
 }
 export interface IAuthRoutes {
   router: Router

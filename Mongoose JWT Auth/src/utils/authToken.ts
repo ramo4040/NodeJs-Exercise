@@ -23,6 +23,12 @@ export default class AuthToken implements IAuthToken {
     })
   }
 
+  async generateVerifyEmailToken(username: string): Promise<string> {
+    return await jwt.sign({ username: username }, env.VERIFY_EMAIL.secret, {
+      expiresIn: env.VERIFY_EMAIL.expire,
+    })
+  }
+
   /**
    * @param token token from cookie when user need to acces some protected resources
    * @returns decode object container user Information stored in jwt token

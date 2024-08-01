@@ -15,6 +15,7 @@ const TYPES = {
   //Utils
   PasswordHasher: Symbol.for('PasswordHasher'),
   AuthToken: Symbol.for('AuthToken'),
+  NodeMailer: Symbol.for('NodeMailer'),
 
   //Validator
   AuthValidator: Symbol.for('AuthValidator'),
