@@ -7,13 +7,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ./src",
-    "prepare": "husky"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm format"
-    }
+    "lint:fix": "eslint --fix ./src"
   },
   "keywords": [],
   "author": "",
@@ -44,7 +38,6 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.8.0",
-    "husky": "^9.1.4",
     "prettier": "^3.3.3",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
