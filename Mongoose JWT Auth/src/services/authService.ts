@@ -167,7 +167,9 @@ export default class AuthService implements IAuthService {
     if (decodeVmToken) {
       // update verified
       const user = await this.UserRepository.update({ username: decodeVmToken.username }, { emailVerified: true })
-      if (user.matchedCount) {
+      console.log(user)
+
+      if (user.modifiedCount) {
         return {
           success: true,
           status: 200,
