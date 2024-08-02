@@ -24,9 +24,9 @@ export default class AuthController implements IAuthController {
   }
 
   login = async (req: Request, res: Response): Promise<void> => {
-    const { refreshToken, accessToken, message, status } = await this.AuthService.login(req.body)
+    const result = await this.AuthService.login(req.body)
     // add token in cookie
-    if (refreshToken) {
+    if (result.refreshToken) {
       const options: CookieOptions = {
         httpOnly: true,
         domain: 'localhost',
@@ -34,11 +34,11 @@ export default class AuthController implements IAuthController {
         // secure: true, // https
         sameSite: 'strict',
       }
-      res.cookie('accessToken', accessToken, { ...options, maxAge: 15 * 60 * 1000 })
-      res.cookie('refreshToken', refreshToken, { ...options, maxAge: 7 * 24 * 60 * 60 * 1000 })
+      res.cookie('accessToken', result.accessToken, { ...options, maxAge: 15 * 60 * 1000 })
+      res.cookie('refreshToken', result.refreshToken, { ...options, maxAge: 7 * 24 * 60 * 60 * 1000 })
     }
 
-    res.status(status).send({ message: message })
+    res.status(result.status).send(result)
   }
 
   logout = async (req: Request, res: Response): Promise<void> => {
