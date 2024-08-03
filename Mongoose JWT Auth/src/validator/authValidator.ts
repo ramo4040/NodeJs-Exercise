@@ -45,21 +45,17 @@ export default class AuthValidator implements IAuthValidator {
   })
 
   // Middleware functions to validate login and regiser requests
-  loginValidate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    try {
-      await this.loginSchema.validateAsync(req.body)
-      next()
-    } catch (error: any) {
-      res.status(422).send({ message: error?.details[0].message })
-    }
-  }
 
-  registerValidate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  validate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
+      if (req.path === '/login') {
+        await this.loginSchema.validateAsync(req.body)
+        return
+      }
       await this.RegisterSchema.validateAsync(req.body)
       next()
     } catch (error: any) {
-      res.status(422).send({ message: error?.details[0].message })
+      res.status(422).send({ status: false, message: error?.details[0].message })
     }
   }
 }
