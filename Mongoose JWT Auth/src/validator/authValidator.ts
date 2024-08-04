@@ -50,6 +50,7 @@ export default class AuthValidator implements IAuthValidator {
     try {
       if (req.path === '/login') {
         await this.loginSchema.validateAsync(req.body)
+        next()
         return
       }
       await this.RegisterSchema.validateAsync(req.body)

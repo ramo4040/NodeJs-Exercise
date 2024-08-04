@@ -13,13 +13,13 @@ export default class AuthMiddleware implements IAuthMiddleware {
     @inject(TYPES.RefreshTokenRepo) private RefreshTokenRepo: IRefreshTokenRepo<IUserRefreshToken>,
   ) {}
 
-  verifyToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  authenticateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { accessToken, refreshToken } = req.cookies
 
     const decodeAccessToken = await this.AuthToken.verify(accessToken, env.ACCESS_TOKEN.secret)
     // access token  valid
     if (decodeAccessToken) {
-      res.locals.user = decodeAccessToken
+      res.locals.isValid = true
       next()
       return
     }
@@ -41,18 +41,20 @@ export default class AuthMiddleware implements IAuthMiddleware {
           sameSite: 'strict',
         }
         //set new access token
-        res.locals.user = newAccessToken
+        res.locals.isValid = true
         res.cookie('accessToken', newAccessToken, { ...options, maxAge: 15 * 60 * 1000 })
         next()
         return
       }
 
       // if refresh token not valid
-      res.status(401).send({ message: 'UNAUTHORIZED' })
+      res.locals.isValid = false
+      next()
       return
     }
 
     //if (access token - refresh token) invalid
-    res.status(401).send({ message: 'UNAUTHORIZED' })
+    res.locals.isValid = false
+    next()
   }
 }

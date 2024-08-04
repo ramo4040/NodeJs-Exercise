@@ -12,13 +12,13 @@ export default class AuthToken implements IAuthToken {
    * @returns jwt token @type String
    */
   async generateAccessToken(data: IUser): Promise<string> {
-    return await jwt.sign({ _id: data._id, email: data.email, username: data.username }, env.ACCESS_TOKEN.secret, {
+    return await jwt.sign({ _id: data._id }, env.ACCESS_TOKEN.secret, {
       expiresIn: env.ACCESS_TOKEN.expire,
     })
   }
 
   async generateRefreshToken(data: IJwtPayload): Promise<string> {
-    return await jwt.sign({ _id: data._id, email: data.email, username: data.username }, env.REFRESH_TOKEN.secret, {
+    return await jwt.sign({ _id: data._id }, env.REFRESH_TOKEN.secret, {
       expiresIn: env.REFRESH_TOKEN.expire,
     })
   }

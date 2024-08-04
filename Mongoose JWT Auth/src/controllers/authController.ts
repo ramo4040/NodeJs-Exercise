@@ -11,6 +11,7 @@ export default class AuthController implements IAuthController {
   constructor(@inject(TYPES.AuthService) private AuthService: IAuthService) {}
 
   /**
+   * Handles {POST} requests '/auth/validate' endpoint. to validate user token
    * Handles {POST} requests '/auth/register' endpoint.
    * Handles {POST} requests '/auth/login' endpoint.
    * Handles {GET} requests '/auth/logout' endpoint.
@@ -18,6 +19,15 @@ export default class AuthController implements IAuthController {
    * @param req The Express request object
    * @param res The Express response object
    */
+
+  handleAuthUser = async (req: Request, res: Response): Promise<void> => {
+    if (res.locals.isValid) {
+      res.status(200).end()
+      return
+    }
+    res.status(401).send({ message: 'UNAUTHORIZED' })
+  }
+
   register = async (req: Request, res: Response): Promise<void> => {
     const result = await this.AuthService.register(req.body)
     res.status(result.status).send(result)
@@ -26,18 +36,18 @@ export default class AuthController implements IAuthController {
   login = async (req: Request, res: Response): Promise<void> => {
     const result = await this.AuthService.login(req.body)
     // add token in cookie
-    if (result.refreshToken) {
+    if (result.success) {
       const options: CookieOptions = {
         httpOnly: true,
         domain: 'localhost',
-        path: '/',
         // secure: true, // https
         sameSite: 'strict',
       }
-      res.cookie('accessToken', result.accessToken, { ...options, maxAge: 15 * 60 * 1000 })
-      res.cookie('refreshToken', result.refreshToken, { ...options, maxAge: 7 * 24 * 60 * 60 * 1000 })
+      res.cookie('accessToken', result.accessToken, { ...options, path: '/', maxAge: 15 * 60 * 1000 })
+      res.cookie('refreshToken', result.refreshToken, { ...options, path: '/refresh', maxAge: 7 * 24 * 60 * 60 * 1000 })
     }
 
+    delete result.accessToken
     res.status(result.status).send(result)
   }
 

@@ -112,7 +112,7 @@ export default class AuthService implements IAuthService {
             success: true,
             status: 200,
             accessToken: accessToken,
-            refreshToken: refreshToken,
+            user: user,
             message: 'You have successfully logged in.',
           }
         }

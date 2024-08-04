@@ -2,6 +2,7 @@ import { NextFunction, type Request, type Response, type Router } from 'express'
 import { IUser } from './IUser'
 
 export interface IAuthController {
+  handleAuthUser(req: Request, res: Response): Promise<void>
   register(req: Request, res: Response): Promise<void>
   login(req: Request, res: Response): Promise<void>
   logout(req: Request, res: Response): Promise<void>
@@ -34,5 +35,5 @@ export interface IStatusMessage {
 }
 
 export interface IAuthMiddleware {
-  verifyToken(req: Request, res: Response, next: NextFunction): Promise<void>
+  authenticateUser(req: Request, res: Response, next: NextFunction): Promise<void>
 }
