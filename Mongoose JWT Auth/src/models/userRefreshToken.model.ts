@@ -1,9 +1,8 @@
 import { IUserRefreshToken } from '@/core/interfaces/IUser'
-import { Model, model, Schema, Types } from 'mongoose'
+import { Model, model, Schema } from 'mongoose'
 
 const userRefreshToken = new Schema<IUserRefreshToken>(
   {
-    userId: { type: Types.ObjectId },
     refreshToken: { type: String, required: true },
   },
   { collection: 'userRefreshToken' },

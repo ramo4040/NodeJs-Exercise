@@ -18,8 +18,8 @@ export default class AuthRoutes implements IAuthRoutes {
   }
 
   registerRoutes(): void {
+    this.router.post('/token/refresh', this.AuthController.refreshToken)
     this.router.post('/token/validate', this.AuthMiddleware.authenticateUser, this.AuthController.handleAuthUser)
-    this.router.post('/token/refresh')
     this.router.post('/register', this.AuthValidator.validate, this.AuthController.register)
     this.router.post('/login', this.AuthValidator.validate, this.AuthController.login)
     this.router.get('/logout', this.AuthController.logout)

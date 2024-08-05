@@ -11,7 +11,7 @@ export default class AuthController implements IAuthController {
   constructor(@inject(TYPES.AuthService) private AuthService: IAuthService) {}
 
   /**
-   * Handles {POST} requests '/auth/validate' endpoint. to validate user token
+   * Handles {POST} requests '/token/validate' endpoint. to validate user token
    * Handles {POST} requests '/auth/register' endpoint.
    * Handles {POST} requests '/auth/login' endpoint.
    * Handles {GET} requests '/auth/logout' endpoint.
@@ -26,6 +26,30 @@ export default class AuthController implements IAuthController {
       return
     }
     res.status(401).send({ message: 'UNAUTHORIZED' })
+  }
+
+  refreshToken = async (req: Request, res: Response): Promise<void> => {
+    const { status, success, refreshToken, accessToken } = await this.AuthService.handleRefreshToken(
+      req.cookies.refreshToken,
+    )
+
+    if (success) {
+      const options: CookieOptions = {
+        domain: 'localhost',
+        // secure:true, // https only
+        httpOnly: true,
+        sameSite: 'strict',
+      }
+
+      res.cookie('accessToken', accessToken, { ...options, path: '/', maxAge: 15 * 60 * 1000 })
+      res.cookie('refreshToken', refreshToken, {
+        ...options,
+        path: '/api/v1/auth/token/refresh',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+    }
+
+    res.status(status).end()
   }
 
   register = async (req: Request, res: Response): Promise<void> => {
@@ -43,11 +67,17 @@ export default class AuthController implements IAuthController {
         // secure: true, // https
         sameSite: 'strict',
       }
+
       res.cookie('accessToken', result.accessToken, { ...options, path: '/', maxAge: 15 * 60 * 1000 })
-      res.cookie('refreshToken', result.refreshToken, { ...options, path: '/refresh', maxAge: 7 * 24 * 60 * 60 * 1000 })
+      res.cookie('refreshToken', result.refreshToken, {
+        ...options,
+        path: '/api/v1/auth/token/refresh',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
     }
 
     delete result.accessToken
+    delete result.refreshToken
     res.status(result.status).send(result)
   }
 

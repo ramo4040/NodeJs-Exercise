@@ -3,6 +3,7 @@ import { IUser } from './IUser'
 
 export interface IAuthController {
   handleAuthUser(req: Request, res: Response): Promise<void>
+  refreshToken(req: Request, res: Response): Promise<void>
   register(req: Request, res: Response): Promise<void>
   login(req: Request, res: Response): Promise<void>
   logout(req: Request, res: Response): Promise<void>
@@ -10,6 +11,7 @@ export interface IAuthController {
 }
 
 export interface IAuthService {
+  handleRefreshToken(token: string): Promise<IStatusMessage>
   register(data: IRegistrationData): Promise<IStatusMessage>
   login(data: IRegistrationData): Promise<IStatusMessage>
   logout(refreshToken: string): Promise<IStatusMessage>
@@ -28,7 +30,7 @@ export interface IRegistrationData {
 export interface IStatusMessage {
   success: boolean
   status: number
-  message: string
+  message?: string
   user?: IUser | null
   accessToken?: string
   refreshToken?: string

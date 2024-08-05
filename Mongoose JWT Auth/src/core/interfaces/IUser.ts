@@ -11,7 +11,6 @@ export interface IUser {
 
 export interface IUserRefreshToken extends Document {
   _id: ObjectId
-  userId: ObjectId
   refreshToken: string
 }
 
@@ -25,6 +24,6 @@ export interface IUserRepository<T> {
 
 export interface IRefreshTokenRepo<T> {
   create(userId: ObjectId, refreshToken: string): Promise<void>
-  findByRefreshToken(refreshToken: string): Promise<T | null>
+  findByRefreshToken(oldRefreshToken: string, newRefreshToken: string): Promise<T | null>
   deleteByRefreshToken(refreshToken: string): Promise<IUserRefreshToken | null>
 }

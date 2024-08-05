@@ -9,8 +9,11 @@ export default class RefreshTokenRepo implements IRefreshTokenRepo<IUserRefreshT
     await UserRefreshTokenModel.create({ userId: userId, refreshToken: refreshToken })
   }
 
-  async findByRefreshToken(refreshToken: string): Promise<IUserRefreshToken | null> {
-    return await UserRefreshTokenModel.findOne({ refreshToken: refreshToken })
+  async findByRefreshToken(oldRefreshToken: string, newRefreshToken: string): Promise<IUserRefreshToken | null> {
+    return await UserRefreshTokenModel.findOneAndUpdate(
+      { refreshToken: oldRefreshToken },
+      { refreshToken: newRefreshToken },
+    )
   }
 
   async deleteByRefreshToken(refreshToken: string): Promise<IUserRefreshToken | null> {

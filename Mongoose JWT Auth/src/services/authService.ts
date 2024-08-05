@@ -112,6 +112,7 @@ export default class AuthService implements IAuthService {
             success: true,
             status: 200,
             accessToken: accessToken,
+            refreshToken: refreshToken,
             user: user,
             message: 'You have successfully logged in.',
           }
@@ -181,6 +182,39 @@ export default class AuthService implements IAuthService {
       success: false,
       status: 400,
       message: 'Invalid verification token.',
+    }
+  }
+
+  async handleRefreshToken(token: string): Promise<IStatusMessage> {
+    const refreshToken = await this.AuthToken.verify(token, env.REFRESH_TOKEN.secret)
+
+    if (!refreshToken) {
+      return {
+        status: 401,
+        success: false,
+      }
+    }
+
+    const newRefreshToken = await this.AuthToken.generateRefreshToken(refreshToken)
+    const isRefreshTokenValid = await this.RefreshTokenRepo.findByRefreshToken(token, newRefreshToken)
+
+    // check if refresh token exist
+    if (isRefreshTokenValid) {
+      // Generate a new access
+      const newAccessToken = await this.AuthToken.generateAccessToken(refreshToken)
+
+      return {
+        success: true,
+        status: 200,
+        refreshToken: newRefreshToken,
+        accessToken: newAccessToken,
+      }
+    }
+
+    // if (refresh - access) tokens not valid
+    return {
+      status: 401,
+      success: false,
     }
   }
 }
