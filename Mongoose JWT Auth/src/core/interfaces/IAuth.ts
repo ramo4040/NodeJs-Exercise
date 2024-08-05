@@ -14,7 +14,7 @@ export interface IAuthService {
   handleRefreshToken(token: string): Promise<IStatusMessage>
   register(data: IRegistrationData): Promise<IStatusMessage>
   login(data: IRegistrationData): Promise<IStatusMessage>
-  logout(refreshToken: string): Promise<IStatusMessage>
+  logout(accessToken: string): Promise<IStatusMessage>
   verifyEmail(verifyToken: string): Promise<IStatusMessage>
 }
 export interface IAuthRoutes {

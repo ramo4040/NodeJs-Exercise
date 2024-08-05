@@ -137,10 +137,12 @@ export default class AuthService implements IAuthService {
     }
   }
 
-  async logout(refreshToken: string): Promise<IStatusMessage> {
-    // if refresh token exist in cookie and database
-    if (refreshToken) {
-      const result = await this.RefreshTokenRepo.deleteByRefreshToken(refreshToken)
+  async logout(accessToken: string): Promise<IStatusMessage> {
+    const decode = await this.AuthToken.verify(accessToken, env.ACCESS_TOKEN.secret)
+
+    if (decode) {
+      const result = await this.RefreshTokenRepo.deleteByUserId(decode._id)
+      console.log(result)
       if (result) {
         return {
           success: true,

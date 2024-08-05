@@ -16,7 +16,7 @@ export default class RefreshTokenRepo implements IRefreshTokenRepo<IUserRefreshT
     )
   }
 
-  async deleteByRefreshToken(refreshToken: string): Promise<IUserRefreshToken | null> {
-    return await UserRefreshTokenModel.findOneAndDelete({ refreshToken: refreshToken })
+  async deleteByUserId(userId: ObjectId): Promise<IUserRefreshToken | null> {
+    return await UserRefreshTokenModel.findOneAndDelete({ userId: userId })
   }
 }

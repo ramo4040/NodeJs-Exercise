@@ -13,6 +13,7 @@ export interface IAuthToken {
 }
 
 export interface IJwtPayload extends IUser {
+  userId: string
   email: string
   username: string
   iat: number

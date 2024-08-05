@@ -82,9 +82,9 @@ export default class AuthController implements IAuthController {
   }
 
   logout = async (req: Request, res: Response): Promise<void> => {
-    const { refreshToken } = req.cookies
+    const { accessToken } = req.cookies
     // check if token exist and delete them
-    const { success, status, message } = await this.AuthService.logout(refreshToken)
+    const { success, status, message } = await this.AuthService.logout(accessToken)
     if (success) {
       res.clearCookie('accessToken')
       res.clearCookie('refreshToken')
