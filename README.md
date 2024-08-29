@@ -68,8 +68,117 @@ This project is licensed under the MIT license.
   </p>
 </details>
 
+
 <details>
-  <summary><h3>JWT auth (MYSQL-MongoDB native-Mongoose)</h3></summary>
+  <summary><h3>jwt auth example</h3></summary>
+
+  <p>
+
+### JWT Authentication Example
+
+Create a Node.js application that allows users to register, log in, and authenticate using JWT. Implement APIs for registration, login, and accessing a protected route using a well-organized project structure.
+
+#### 1. Environment Variables 🔐
+
+Create a `.env` file by copying the `.env.template` file and filling in the following environment variables:
+
+```
+PORT=3000
+JWT_SECRET=
+JWT_EXPIRE=
+
+DATABASE_URL="mysql://root:123456@localhost:3306/user"
+
+
+MYSQLDB_USER="root"
+MYSQLDB_ROOT_PASSWORD="123456"
+MYSQLDB_DATABASE="user"
+MYSQLDB_LOCAL_PORT=3307
+MYSQLDB_DOCKER_PORT=3306
+
+NODE_LOCAL_PORT=3000
+NODE_DOCKER_PORT=3000
+```
+
+#### 3. Installation and Running 
+
+1. **Prerequisites:**
+   * **Docker and Docker Compose** installed.
+   * **Node.js and npm** installed.
+
+3. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ramo4040/NodeJs-Exercise.git
+   ```
+4. **Navigate to the project directory:**
+   ```bash
+   cd NodeJs-Exercise
+   ```
+5. **Install dependencies:**
+   ```bash
+   npm install 
+   ```
+6. **Start the containers:**
+   ```bash
+   docker-compose up --build -d
+   ```
+   Or locally
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev --name init
+   npm run dev
+   ```
+   
+   This will build the Docker images if they don't exist and then run them in detached mode.
+8. **Access the application:**
+   Open your browser and navigate to `http://localhost:3000` (or the port specified in your `.env` file).
+
+## Routes
+
+### Register (/auth/register)
+
+**Method:** POST
+
+**Body:**
+
+```json
+{ 
+  "email": "your-email",
+  "password": "your-password" 
+}
+```
+
+**Description:** Registers a new user by hashing the password and storing the user details.
+
+### Login (/auth/login)
+
+**Method:** POST
+
+**Body:**
+
+```json
+{ 
+  "email": "your-email",
+  "password": "your-password" 
+}
+```
+
+**Description:** Authenticates a user by verifying the password and generates a JWT if credentials are valid.
+
+### Protected Route (/protected)
+
+**Method:** GET
+
+**Description:** Returns protected information if the JWT is valid.
+
+    
+  </p>
+  
+</details>
+
+
+<details>
+  <summary><h3>JWT auth (MongoDB native-Mongoose)</h3></summary>
 
   <p>
 
