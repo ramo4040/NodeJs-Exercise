@@ -1,11 +1,8 @@
-import * as jf from "joiful";
-import { Request, Response } from "express";
+import Joi from 'joi';
+import { Request, Response } from 'express';
 
 class SignUp {
-  @jf.string().email().required().label("Email")
   email: string;
-
-  @jf.string().min(8).required().label("Password")
   password: string;
 
   constructor(data) {
@@ -16,8 +13,12 @@ class SignUp {
 
 export class AuthValidator {
   static async validate(req: Request, res: Response, next) {
-    const signUp = new SignUp(req.body);
-    const { error } = jf.validate(signUp);
+    const signUpSchema = Joi.object({
+      email: Joi.string().email().required().label('Email'),
+      password: Joi.string().min(8).required().label('Password'),
+    });
+
+    const { error } = signUpSchema.validate(req.body);
 
     if (error) {
       res.status(422).send({ message: error.details[0].message });

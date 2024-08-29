@@ -1,4 +1,4 @@
-import prisma from "../Config/prisma.js";
+import prisma from "../Config/prisma";
 
 
 export class UserModel {

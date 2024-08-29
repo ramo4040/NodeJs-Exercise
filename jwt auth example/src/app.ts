@@ -1,7 +1,7 @@
 import express from "express";
-import { AuthRoutes } from "./Routes/AuthRoutes.js";
 import cookieParser from "cookie-parser";
-import limiter from "./Middleware/RateLimit.js";
+import limiter from "./Middleware/RateLimit";
+import { AuthRoutes } from "./Routes/authRoutes";
 class App {
   private readonly app: express.Application;
 

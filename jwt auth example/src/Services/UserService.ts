@@ -1,5 +1,5 @@
-import { UserModel } from "../Models/UserModel.js";
 import bcrypt from "bcrypt";
+import { UserModel } from "../Models/UserModel";
 
 export class UserService {
   static async createUser(data) {

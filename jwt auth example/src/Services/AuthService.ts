@@ -1,11 +1,9 @@
 import bcrypt from "bcrypt";
-import { UserModel } from "../Models/UserModel.js";
 import jwt from "jsonwebtoken";
-import { UserRole } from "@prisma/client";
+import { UserModel } from "../Models/UserModel";
 
 interface jwtDecode {
   userId: string;
-  userRole: UserRole;
   iat: number;
   exp: number;
 }
@@ -24,7 +22,7 @@ export class AuthService {
       { userId: user.id, userRole: user.role },
       process.env.JWT_SECRET,
       {
-        expiresIn: "1h",
+        expiresIn: process.env.JWT_EXPIRE,
       }
     );
     return token;
