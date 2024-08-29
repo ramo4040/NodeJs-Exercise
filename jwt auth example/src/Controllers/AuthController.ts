@@ -8,7 +8,7 @@ export class AuthController {
   static async register(req: Request, res: Response) {
     const data = req.body;
     const user = await UserService.createUser(data);
-
+    
     if (!user.status && "message" in user) {
       return res.status(422).send({ message: user.message });
     }

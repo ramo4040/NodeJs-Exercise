@@ -1,4 +1,3 @@
-# Use the lightweight node:18-alpine image as the base for all stages
 FROM node:18-alpine AS base
 
 # dependencies stage
@@ -20,8 +19,9 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules 
+COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3000
 
-CMD ["node", "dist/server.js"]
+# Run Prisma migrations and start the application
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]
