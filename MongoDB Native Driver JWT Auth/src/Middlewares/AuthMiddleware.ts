@@ -1,10 +1,9 @@
+import { env } from "@/core/config/env";
+import { HttpCode } from "@/core/Constants/httpStatusCode";
+import IAuthMiddleware, { decodeToken } from "@/core/Interfaces/IAuthMidlleware";
 import { NextFunction, Request, Response } from "express";
-import IAuthMiddleware from "../core/Interfaces/IAuthMidlleware";
 import { injectable } from "inversify";
 import Jwt from "jsonwebtoken";
-import { env } from "../core/Config/env";
-import { decodeToken } from "../core/Interfaces/IAuthMidlleware";
-import { HttpCode } from "../core/Constants/httpStatusCode";
 
 @injectable()
 export default class AuthMiddleware implements IAuthMiddleware {
@@ -21,7 +20,7 @@ export default class AuthMiddleware implements IAuthMiddleware {
     }
 
     try {
-      const decode = await Jwt.verify(token, env.JWT_SECRET_KEY);
+      const decode = Jwt.verify(token, env.JWT_SECRET_KEY);
       res.locals.user = decode as decodeToken;
       next();
     } catch (error) {

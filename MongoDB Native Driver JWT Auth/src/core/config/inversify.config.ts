@@ -1,14 +1,15 @@
 import { Container } from "inversify";
-import { TYPES } from "@src/core/Constants/types";
+import { TYPES } from "../Constants/types";
 import MongoDb from "./mongodb.config";
-import UserRepository from "@/src/Repositories/UserRepository";
-import UserService from "@/src/Services/UserServices";
-import UserController from "@/src/controllers/UserController";
-import { UserRoutes } from "@/src/Routes/UserRoutes";
-import UserValidation from "@/src/Validations/userValidation";
-import BaseRoutes from "@/src/Routes/BaseRoutes";
-import ProtectedRoutes from '@/src/Routes/ProtectedRoutes';
-import AuthMiddleware from '@/src/Middlewares/AuthMiddleware';
+import UserService from "@/services/UserServices";
+import UserRepository from "@/repositories/UserRepository";
+import UserController from "@/controllers/UserController";
+import UserValidation from "@/validator/userValidation";
+import AuthMiddleware from "@/middlewares/AuthMiddleware";
+import { UserRoutes } from "@/routes/UserRoutes";
+import BaseRoutes from "@/routes/BaseRoutes";
+import ProtectedRoutes from "@/routes/ProtectedRoutes";
+
 
 const container = new Container();
 

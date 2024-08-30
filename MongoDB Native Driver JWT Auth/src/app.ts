@@ -1,10 +1,11 @@
 import "reflect-metadata";
-import { env } from "@/src/core/Config/env";
-import Server from "@src/server";
-import container from "./core/Config/inversify.config";
-import { TYPES } from "./core/Constants/types";
-import IRoutes from "./core/Interfaces/IRoutes";
-import { IMongoDbConfig } from "./core/Interfaces/IMongodb.config";
+import { TYPES } from './core/Constants/types';
+import container from './core/config/inversify.config';
+import Server from './server';
+import { env } from './core/config/env';
+import { IMongoDbConfig } from './core/Interfaces/IMongodb.config';
+import IRoutes from './core/Interfaces/IRoutes';
+
 
 async function main(): Promise<void> {
   const mongoDB = container.get(TYPES.MongoDb) as IMongoDbConfig;

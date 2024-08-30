@@ -1,9 +1,9 @@
+import { TYPES } from "@/core/Constants/types";
+import { IMongoDbConfig } from "@/core/Interfaces/IMongodb.config";
+import IUserRepository from "@/core/Interfaces/IUserRepository";
+import { UserModel } from "@/models/UserModel";
 import { injectable, inject } from "inversify";
-import { TYPES } from "@src/core/Constants/types";
-import { type Collection } from "mongodb";
-import { IMongoDbConfig } from "../core/Interfaces/IMongodb.config";
-import IUserRepository from "../core/Interfaces/IUserRepository";
-import { type UserModel } from "../Models/UserModel";
+import { Document, type Collection } from "mongodb";
 
 @injectable()
 export default class UserRepository implements IUserRepository {

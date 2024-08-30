@@ -1,4 +1,4 @@
-import { type UserModel } from "@/src/Models/UserModel";
+import { type UserModel } from "@/models/UserModel";
 
 export default interface IUserService {
   signUp(data: unknown): Promise<UserModel | null>;

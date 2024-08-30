@@ -1,9 +1,9 @@
 import { inject, injectable } from "inversify";
-import IUserController from "../core/Interfaces/IUserController";
-import { TYPES } from "@src/core/Constants/types";
-import IUserService from "../core/Interfaces/IUserService";
 import { type Request, type Response } from "express";
-import { HttpCode } from "../core/Constants/httpStatusCode";
+import { TYPES } from "@/core/Constants/types";
+import IUserService from "@/core/Interfaces/IUserService";
+import IUserController from "@/core/Interfaces/IUserController";
+import { HttpCode } from "@/core/Constants/httpStatusCode";
 
 @injectable()
 export default class UserController implements IUserController {

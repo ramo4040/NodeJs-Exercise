@@ -1,8 +1,8 @@
+import { TYPES } from "@/core/Constants/types";
+import IAuthMiddleware from "@/core/Interfaces/IAuthMidlleware";
+import IRoutes from "@/core/Interfaces/IRoutes";
 import { Request, Response, Router } from "express";
-import IRoutes from "../core/Interfaces/IRoutes";
 import { inject, injectable } from "inversify";
-import { TYPES } from "../core/Constants/types";
-import IAuthMiddleware from "../core/Interfaces/IAuthMidlleware";
 
 @injectable()
 export default class ProtectedRoutes implements IRoutes {

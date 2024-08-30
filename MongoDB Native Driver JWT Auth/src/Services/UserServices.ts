@@ -1,11 +1,11 @@
 import { inject, injectable } from "inversify";
-import IUserService from "../core/Interfaces/IUserService";
-import { UserModel } from "../Models/UserModel";
-import { TYPES } from "@src/core/Constants/types";
-import IUserRepository from "../core/Interfaces/IUserRepository";
 import bcrypt from "bcrypt";
 import Jwt from "jsonwebtoken";
-import { env } from "../core/Config/env";
+import { TYPES } from "@/core/Constants/types";
+import IUserService from "@/core/Interfaces/IUserService";
+import IUserRepository from "@/core/Interfaces/IUserRepository";
+import { UserModel } from "@/models/UserModel";
+import { env } from "@/core/config/env";
 
 interface UserData {
   email: string;

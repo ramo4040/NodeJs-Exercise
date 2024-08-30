@@ -1,8 +1,8 @@
-import Joi from "joi";
-import { NextFunction, Request, Response } from "express";
-import IUserValidation from "../core/Interfaces/IUserValidation";
+import { HttpCode } from "@/core/Constants/httpStatusCode";
+import IUserValidation from "@/core/Interfaces/IUserValidation";
+import { NextFunction, Request , Response } from "express";
 import { injectable } from "inversify";
-import { HttpCode } from "../core/Constants/httpStatusCode";
+import Joi from "joi";
 
 @injectable()
 class UserValidation implements IUserValidation {

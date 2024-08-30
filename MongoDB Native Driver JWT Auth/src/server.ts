@@ -1,6 +1,6 @@
 import express from "express";
-import IRoutes from "./core/Interfaces/IRoutes";
 import cookieparser from "cookie-parser";
+import IRoutes from "./core/Interfaces/IRoutes";
 
 interface ServerOptions {
   port: number;

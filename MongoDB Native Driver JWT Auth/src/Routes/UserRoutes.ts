@@ -1,8 +1,9 @@
+import { TYPES } from "@/core/Constants/types";
+import IUserController from "@/core/Interfaces/IUserController";
+import IUserValidation from "@/core/Interfaces/IUserValidation";
 import { Router } from "express";
 import { inject, injectable } from "inversify";
-import IUserController from "../core/Interfaces/IUserController";
-import { TYPES } from "@src/core/Constants/types";
-import IUserValidation from "../core/Interfaces/IUserValidation";
+
 
 @injectable()
 export class UserRoutes {

@@ -1,7 +1,7 @@
+import { TYPES } from "@/core/Constants/types";
+import IRoutes from "@/core/Interfaces/IRoutes";
 import { Router } from "express";
 import { inject, injectable } from "inversify";
-import { TYPES } from "../core/Constants/types";
-import IRoutes from "../core/Interfaces/IRoutes";
 
 @injectable()
 export default class BaseRoutes {
